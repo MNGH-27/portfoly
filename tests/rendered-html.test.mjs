@@ -36,6 +36,8 @@ test("server-renders the portfolio content", async () => {
     /<title>Mohsen Nouri — Full-Stack Software Developer<\/title>/i,
   );
   assert.match(html, /Full-Stack Software Developer/i);
+  assert.match(html, /AI Chat RTL/i);
+  assert.match(html, /Firefox Extension/i);
   assert.match(html, /Bonyad Maskan e-Services/i);
   assert.match(html, /Go \+ Node/i);
   assert.match(html, /Software Developer &amp; Team Leader/i);

@@ -1,5 +1,6 @@
 import { FiBarChart2, FiCode, FiGlobe } from "react-icons/fi";
 import {
+  SiFirefoxbrowser,
   SiGo,
   SiNestjs,
   SiNextdotjs,
@@ -173,6 +174,19 @@ export const moreSkills: Localized[] = [
 ];
 
 export const projects: Project[] = [
+  {
+    title: { en: "AI Chat RTL", fa: "راست‌چین چت‌های هوش مصنوعی" },
+    type: {
+      en: "Firefox Extension · TypeScript",
+      fa: "افزونه فایرفاکس · TypeScript",
+    },
+    description: {
+      en: "A lightweight Firefox extension with per-site RTL support for ChatGPT, Gemini, and Claude, while keeping code blocks and math LTR.",
+      fa: "افزونه‌ای سبک برای فایرفاکس که RTL را برای ChatGPT، Gemini و Claude به‌صورت مستقل فعال می‌کند و کدها و فرمول‌ها را LTR نگه می‌دارد.",
+    },
+    href: "https://github.com/MNGH-27/firefox-ai-rtl-extention",
+    icon: SiFirefoxbrowser,
+  },
   {
     title: { en: "Monorepo Boilerplate", fa: "قالب آماده مونوریپو" },
     type: { en: "Full-Stack Architecture", fa: "معماری فول‌استک" },
