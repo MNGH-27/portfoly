@@ -28,3 +28,10 @@ npm run lint
 npm run build
 npm test
 ```
+
+## Deployment
+
+Pushes to `main` are automatically built and deployed to GitHub Pages by the
+workflow in `.github/workflows/deploy-pages.yml`. The production build uses
+Vinext's static export and applies the repository path supplied by GitHub
+Pages, while local development remains available at `/`.
