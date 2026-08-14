@@ -3,8 +3,10 @@
 import { useEffect, useState } from "react";
 import type { Language, Theme } from "@/types/portfolio";
 
-const LANGUAGE_KEY = "portfolio-language";
-const THEME_KEY = "portfolio-theme";
+// Versioned keys reset preferences from earlier releases while preserving
+// choices made after English + dark became the explicit default.
+const LANGUAGE_KEY = "portfolio-language-v2";
+const THEME_KEY = "portfolio-theme-v2";
 
 export function usePortfolioPreferences() {
   const [preferences, setPreferences] = useState<{

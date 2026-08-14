@@ -28,6 +28,9 @@ test("server-renders the portfolio content", async () => {
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
+  assert.match(html, /<html[^>]*\blang="en"/i);
+  assert.match(html, /<html[^>]*\bdir="ltr"/i);
+  assert.match(html, /<html[^>]*\bdata-theme="dark"/i);
   assert.match(
     html,
     /<title>Mohsen Nouri — Full-Stack Software Developer<\/title>/i,
