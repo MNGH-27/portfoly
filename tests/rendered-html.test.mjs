@@ -40,6 +40,9 @@ test("server-renders the portfolio content", async () => {
   assert.match(html, /Oner Shop/i);
   assert.match(html, /Full-Stack E-commerce/i);
   assert.match(html, /Prisma/i);
+  assert.match(html, /TaskFlow API/i);
+  assert.match(html, /Backend REST API/i);
+  assert.match(html, /connection pooling/i);
   assert.match(html, /AI Chat RTL/i);
   assert.match(html, /Firefox Extension/i);
   assert.match(html, /independent, persistent RTL controls/i);

@@ -229,6 +229,39 @@ export const projects: Project[] = [
     icon: FiShoppingBag,
   },
   {
+    title: { en: "TaskFlow API", fa: "API مدیریت وظایف TaskFlow" },
+    type: {
+      en: "Backend REST API · Go + MySQL",
+      fa: "REST API بک‌اند · Go + MySQL",
+    },
+    description: {
+      en: "A production-minded task management API built with Go and MySQL, packaged with Docker Compose and structured around clear HTTP, domain, and persistence layers.",
+      fa: "یک API مدیریت وظایف با رویکرد production-ready، ساخته‌شده با Go و MySQL و Docker Compose، با جداسازی روشن لایه‌های HTTP، دامنه و ذخیره‌سازی.",
+    },
+    highlights: [
+      {
+        en: "Implements task CRUD, completion filtering, input validation, and consistent JSON error responses.",
+        fa: "عملیات کامل CRUD، فیلتر وضعیت انجام‌شدن، اعتبارسنجی ورودی و پاسخ‌های خطای یکپارچه JSON را پیاده‌سازی می‌کند.",
+      },
+      {
+        en: "Separates repository contracts from MySQL persistence and tests handlers with a fast fake repository.",
+        fa: "قرارداد repository را از ذخیره‌سازی MySQL جدا می‌کند و handlerها را با یک fake repository سریع تست می‌کند.",
+      },
+      {
+        en: "Includes connection pooling, health checks, schema migration, request logging, graceful shutdown, and a multi-stage image.",
+        fa: "شامل connection pooling، health check، migration دیتابیس، ثبت درخواست‌ها، graceful shutdown و image چندمرحله‌ای است.",
+      },
+    ],
+    stack: ["Go", "MySQL", "Docker", "REST API", "SQL", "Testing"],
+    links: [
+      {
+        label: { en: "Source code", fa: "کد منبع" },
+        href: "https://github.com/MNGH-27/taskflow-api",
+      },
+    ],
+    icon: SiGo,
+  },
+  {
     title: { en: "AI Chat RTL", fa: "راست‌چین چت‌های هوش مصنوعی" },
     type: {
       en: "Firefox Extension · TypeScript",
