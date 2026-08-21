@@ -1,4 +1,4 @@
-import { FiBarChart2, FiCode, FiGlobe } from "react-icons/fi";
+import { FiBarChart2, FiCode, FiGlobe, FiShoppingBag } from "react-icons/fi";
 import {
   SiFirefoxbrowser,
   SiGo,
@@ -195,6 +195,39 @@ export const moreSkills: Localized[] = [
 ];
 
 export const projects: Project[] = [
+  {
+    title: { en: "Oner Shop", fa: "فروشگاه Oner" },
+    type: {
+      en: "Full-Stack E-commerce · Monorepo",
+      fa: "فروشگاه فول‌استک · مونوریپو",
+    },
+    description: {
+      en: "An end-to-end commerce platform combining a Next.js storefront, React administration panel, NestJS API, and PostgreSQL database in one workspace.",
+      fa: "یک پلتفرم فروشگاهی کامل شامل فروشگاه Next.js، پنل مدیریت React، API مبتنی بر NestJS و دیتابیس PostgreSQL در یک workspace یکپارچه.",
+    },
+    highlights: [
+      {
+        en: "Built catalog, search, cart, coupon, authentication, profile, and variant-aware inventory flows.",
+        fa: "جریان‌های کاتالوگ، جستجو، سبد خرید، کد تخفیف، احراز هویت، پروفایل و موجودی مبتنی بر تنوع محصول را پیاده‌سازی کردم.",
+      },
+      {
+        en: "Created a responsive Persian admin panel for products, categories, orders, customers, banners, and coupons.",
+        fa: "یک پنل مدیریت فارسی و واکنش‌گرا برای محصولات، دسته‌بندی‌ها، سفارش‌ها، مشتریان، بنرها و کدهای تخفیف ساختم.",
+      },
+      {
+        en: "Designed JWT role-based access, Prisma data models, validated REST APIs, Swagger docs, and low-stock alerts.",
+        fa: "دسترسی نقش‌محور JWT، مدل‌های Prisma، REST API اعتبارسنجی‌شده، مستندات Swagger و هشدار کمبود موجودی را طراحی کردم.",
+      },
+    ],
+    stack: ["Next.js", "React", "NestJS", "Prisma", "PostgreSQL", "TypeScript"],
+    links: [
+      {
+        label: { en: "Source code", fa: "کد منبع" },
+        href: "https://github.com/MNGH-27/oner-shop-demo",
+      },
+    ],
+    icon: FiShoppingBag,
+  },
   {
     title: { en: "AI Chat RTL", fa: "راست‌چین چت‌های هوش مصنوعی" },
     type: {

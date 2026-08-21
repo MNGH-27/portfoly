@@ -37,6 +37,9 @@ test("server-renders the portfolio content", async () => {
   );
   assert.match(html, /Full-Stack Software Developer/i);
   assert.match(html, /Explore my work on GitHub/i);
+  assert.match(html, /Oner Shop/i);
+  assert.match(html, /Full-Stack E-commerce/i);
+  assert.match(html, /Prisma/i);
   assert.match(html, /AI Chat RTL/i);
   assert.match(html, /Firefox Extension/i);
   assert.match(html, /independent, persistent RTL controls/i);
