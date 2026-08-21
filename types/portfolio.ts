@@ -15,8 +15,20 @@ export interface Project {
   title: Localized;
   type: Localized;
   description: Localized;
-  href: string;
+  highlights: Localized[];
+  stack: string[];
+  links: Array<{
+    label: Localized;
+    href: string;
+  }>;
   icon: IconType;
+}
+
+export interface DocumentItem {
+  title: Localized;
+  description: Localized;
+  meta: Localized;
+  href: string;
 }
 
 export interface Experience {

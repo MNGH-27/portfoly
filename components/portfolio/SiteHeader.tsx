@@ -28,6 +28,7 @@ export function SiteHeader({
         <nav aria-label={copy.navigationLabel}>
           <a href="#projects">{copy.projects}</a>
           <a href="#about">{copy.about}</a>
+          <a href="#documents">{copy.documents}</a>
           <a href={`mailto:${CONTACT.email}`}>{copy.contact}</a>
         </nav>
         <div className="headerTools">

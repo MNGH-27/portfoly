@@ -1,4 +1,9 @@
-import { FiArrowDown, FiArrowUpRight, FiMail } from "react-icons/fi";
+import {
+  FiArrowDown,
+  FiArrowUpRight,
+  FiGithub,
+  FiMail,
+} from "react-icons/fi";
 import { CONTACT, coreSkills, type PortfolioCopy } from "@/data/portfolio";
 import type { Language } from "@/types/portfolio";
 
@@ -18,6 +23,26 @@ export function HeroSection({ language, copy }: HeroSectionProps) {
         <span>{copy.role}</span>
       </h1>
       <p className="heroIntro reveal delayThree">{copy.intro}</p>
+
+      <a
+        className="githubSpotlight reveal delayThree"
+        href={CONTACT.github}
+        target="_blank"
+        rel="noreferrer"
+      >
+        <span className="githubSpotlightIcon" aria-hidden="true">
+          <FiGithub />
+        </span>
+        <span className="githubSpotlightCopy">
+          <small>{copy.githubEyebrow}</small>
+          <strong>{copy.githubHeading}</strong>
+          <span>{copy.githubDescription}</span>
+        </span>
+        <span className="githubSpotlightAction">
+          {copy.githubAction}
+          <FiArrowUpRight aria-hidden="true" />
+        </span>
+      </a>
 
       <div
         className="skillGrid reveal delayThree"

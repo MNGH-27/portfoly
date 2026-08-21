@@ -11,6 +11,7 @@ import {
   SiTypescript,
 } from "react-icons/si";
 import type {
+  DocumentItem,
   Experience,
   Language,
   Localized,
@@ -31,6 +32,7 @@ export const copy = {
     navigationLabel: "Primary navigation",
     projects: "Projects",
     about: "About",
+    documents: "Documents",
     contact: "Contact",
     languageLabel: "Choose language",
     darkMode: "Switch to dark mode",
@@ -43,6 +45,11 @@ export const copy = {
     coreSkillsLabel: "Core skills",
     explore: "Explore my work",
     getInTouch: "Get in touch",
+    githubEyebrow: "OPEN SOURCE · @MNGH-27",
+    githubHeading: "Explore my work on GitHub.",
+    githubDescription:
+      "Source code, architecture experiments, reusable starters, and browser tools.",
+    githubAction: "View profile",
     projectsLabel: "01 / Selected Projects",
     projectsHeading: "A few things I’ve built.",
     aboutLabel: "02 / About Me",
@@ -58,6 +65,10 @@ export const copy = {
     additionalSkills: "Additional skills",
     experienceLabel: "03 / Experience",
     experienceHeading: "Professional experience.",
+    documentsLabel: "04 / Documents",
+    documentsHeading: "Resume and professional documents.",
+    viewDocument: "View document",
+    downloadDocument: "Download PDF",
     contactLabel: "Have a project in mind?",
     contactHeading: "Let’s build something useful.",
     startConversation: "Start a conversation",
@@ -71,6 +82,7 @@ export const copy = {
     navigationLabel: "مسیرهای اصلی",
     projects: "پروژه‌ها",
     about: "درباره من",
+    documents: "مستندات",
     contact: "تماس",
     languageLabel: "انتخاب زبان",
     darkMode: "تغییر به حالت تاریک",
@@ -83,6 +95,11 @@ export const copy = {
     coreSkillsLabel: "مهارت‌های اصلی",
     explore: "مشاهده پروژه‌ها",
     getInTouch: "تماس با من",
+    githubEyebrow: "متن‌باز · @MNGH-27",
+    githubHeading: "پروژه‌هایم را در GitHub ببینید.",
+    githubDescription:
+      "کد منبع، تجربه‌های معماری، استارترهای قابل استفاده مجدد و ابزارهای مرورگر.",
+    githubAction: "مشاهده پروفایل",
     projectsLabel: "۰۱ / پروژه‌های منتخب",
     projectsHeading: "بخشی از چیزهایی که ساخته‌ام.",
     aboutLabel: "۰۲ / درباره من",
@@ -98,6 +115,10 @@ export const copy = {
     additionalSkills: "مهارت‌های تکمیلی",
     experienceLabel: "۰۳ / تجربه کاری",
     experienceHeading: "تجربه‌های حرفه‌ای من.",
+    documentsLabel: "۰۴ / مستندات",
+    documentsHeading: "رزومه و مدارک حرفه‌ای.",
+    viewDocument: "مشاهده سند",
+    downloadDocument: "دانلود PDF",
     contactLabel: "پروژه‌ای در ذهن دارید؟",
     contactHeading: "بیایید یک چیز مفید بسازیم.",
     startConversation: "شروع گفتگو",
@@ -181,20 +202,64 @@ export const projects: Project[] = [
       fa: "افزونه فایرفاکس · TypeScript",
     },
     description: {
-      en: "A lightweight Firefox extension with per-site RTL support for ChatGPT, Gemini, and Claude, while keeping code blocks and math LTR.",
-      fa: "افزونه‌ای سبک برای فایرفاکس که RTL را برای ChatGPT، Gemini و Claude به‌صورت مستقل فعال می‌کند و کدها و فرمول‌ها را LTR نگه می‌دارد.",
+      en: "A focused Firefox extension that makes Persian and Arabic conversations easier to read without changing the rest of each AI product’s interface.",
+      fa: "افزونه‌ای متمرکز برای فایرفاکس که خواندن گفتگوهای فارسی و عربی را ساده‌تر می‌کند، بدون اینکه سایر بخش‌های رابط هر محصول تغییر کند.",
     },
-    href: "https://github.com/MNGH-27/firefox-ai-rtl-extention",
+    highlights: [
+      {
+        en: "Adds independent, persistent RTL controls for each supported website.",
+        fa: "برای هر وب‌سایت کنترل مستقل و ماندگار RTL فراهم می‌کند.",
+      },
+      {
+        en: "Uses site-specific adapters for ChatGPT, Gemini, and Claude.",
+        fa: "برای ChatGPT، Gemini و Claude از آداپتورهای اختصاصی استفاده می‌کند.",
+      },
+      {
+        en: "Keeps code blocks and mathematical content in LTR for readability.",
+        fa: "بلوک‌های کد و محتوای ریاضی را برای خوانایی به‌صورت LTR نگه می‌دارد.",
+      },
+    ],
+    stack: ["TypeScript", "React", "Vite", "WebExtensions"],
+    links: [
+      {
+        label: { en: "Source code", fa: "کد منبع" },
+        href: "https://github.com/MNGH-27/firefox-ai-rtl-extention",
+      },
+      {
+        label: { en: "Download extension", fa: "دانلود افزونه" },
+        href: "https://github.com/MNGH-27/firefox-ai-rtl-extention/releases/latest",
+      },
+    ],
     icon: SiFirefoxbrowser,
   },
   {
     title: { en: "Monorepo Boilerplate", fa: "قالب آماده مونوریپو" },
     type: { en: "Full-Stack Architecture", fa: "معماری فول‌استک" },
     description: {
-      en: "A modular full-stack starter with Next.js, Express, shared TypeScript packages, Storybook, Jest, and CI-ready Turborepo tooling.",
-      fa: "یک استارتر فول‌استک ماژولار با Next.js، Express، پکیج‌های مشترک TypeScript، Storybook، Jest و ابزارهای آماده CI در Turborepo.",
+      en: "A reusable pnpm and Turborepo workspace for building Next.js products with a shared shadcn/ui component package and consistent tooling.",
+      fa: "یک workspace قابل استفاده مجدد با pnpm و Turborepo برای ساخت محصولات Next.js با پکیج مشترک shadcn/ui و ابزارهای یکپارچه.",
     },
-    href: "https://github.com/MNGH-27/monorepo-boilerplate",
+    highlights: [
+      {
+        en: "Organizes applications and shared packages through a scalable workspace structure.",
+        fa: "اپلیکیشن‌ها و پکیج‌های مشترک را در یک ساختار workspace مقیاس‌پذیر سازمان‌دهی می‌کند.",
+      },
+      {
+        en: "Documents reusable UI components in an isolated Storybook application.",
+        fa: "کامپوننت‌های رابط قابل استفاده مجدد را در یک اپلیکیشن مستقل Storybook مستند می‌کند.",
+      },
+      {
+        en: "Centralizes TypeScript and ESLint configuration across the codebase.",
+        fa: "تنظیمات TypeScript و ESLint را در کل کدبیس متمرکز می‌کند.",
+      },
+    ],
+    stack: ["Next.js", "TypeScript", "Turborepo", "pnpm", "shadcn/ui", "Storybook"],
+    links: [
+      {
+        label: { en: "Source code", fa: "کد منبع" },
+        href: "https://github.com/MNGH-27/monorepo-boilerplate",
+      },
+    ],
     icon: FiCode,
   },
   {
@@ -210,7 +275,27 @@ export const projects: Project[] = [
       en: "Frontend development for a national citizen-services portal, focused on clear service discovery, reliable request flows, and maintainable UI.",
       fa: "توسعه فرانت‌اند پرتال خدمات شهروندی در مقیاس ملی با تمرکز بر دسترسی روشن به خدمات، جریان پایدار درخواست‌ها و رابط قابل نگهداری.",
     },
-    href: "http://eservices.bonyadmaskan.ir/",
+    highlights: [
+      {
+        en: "Built citizen-facing service discovery and online request flows.",
+        fa: "جریان‌های کشف خدمات و ثبت درخواست آنلاین برای شهروندان را توسعه دادم.",
+      },
+      {
+        en: "Created reusable frontend patterns across housing-related programs.",
+        fa: "الگوهای فرانت‌اند قابل استفاده مجدد برای خدمات مختلف حوزه مسکن ایجاد کردم.",
+      },
+      {
+        en: "Prioritized clear states and dependable behavior for a national audience.",
+        fa: "روی وضعیت‌های روشن و رفتار پایدار برای کاربران در مقیاس ملی تمرکز کردم.",
+      },
+    ],
+    stack: ["React", "Next.js", "TypeScript", "REST APIs"],
+    links: [
+      {
+        label: { en: "Live website", fa: "وب‌سایت زنده" },
+        href: "http://eservices.bonyadmaskan.ir/",
+      },
+    ],
     icon: FiGlobe,
   },
   {
@@ -220,8 +305,40 @@ export const projects: Project[] = [
       en: "Built and maintained a BI dashboard for senior management, turning live and aggregated data into clear, performant KPI and chart views.",
       fa: "ساخت و نگهداری داشبورد BI برای مدیران ارشد و تبدیل داده‌های زنده و تجمیعی به نماهای سریع و روشن KPI و نمودارها.",
     },
-    href: "https://rasad.bonyadmaskan.ir/",
+    highlights: [
+      {
+        en: "Built dense management dashboards with KPI and chart-heavy views.",
+        fa: "داشبوردهای مدیریتی متراکم با نماهای KPI و نمودارمحور ساختم.",
+      },
+      {
+        en: "Turned live and aggregated datasets into decision-support visualizations.",
+        fa: "داده‌های زنده و تجمیعی را به مصورسازی‌های مناسب تصمیم‌گیری تبدیل کردم.",
+      },
+      {
+        en: "Maintained clear, stable interactions while rendering large datasets.",
+        fa: "هنگام نمایش دیتاست‌های بزرگ، تعاملات شفاف و پایدار را حفظ کردم.",
+      },
+    ],
+    stack: ["Next.js", "TypeScript", "Highcharts", "Chart.js"],
+    links: [
+      {
+        label: { en: "Live website", fa: "وب‌سایت زنده" },
+        href: "https://rasad.bonyadmaskan.ir/",
+      },
+    ],
     icon: FiBarChart2,
+  },
+];
+
+export const documents: DocumentItem[] = [
+  {
+    title: { en: "Mohsen Nouri — Resume", fa: "رزومه محسن نوری" },
+    description: {
+      en: "A concise overview of my full-stack skills, professional experience, leadership background, and selected projects.",
+      fa: "نمایی خلاصه از مهارت‌های فول‌استک، تجربه حرفه‌ای، سابقه رهبری تیم و پروژه‌های منتخب من.",
+    },
+    meta: { en: "PDF · 2 pages · Updated July 2026", fa: "PDF · ۲ صفحه · به‌روزرسانی ژوئیه ۲۰۲۶" },
+    href: "./Mohsen-Nouri-Resume.pdf",
   },
 ];
 

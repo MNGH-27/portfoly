@@ -4,6 +4,7 @@ import { copy } from "@/data/portfolio";
 import { usePortfolioPreferences } from "@/hooks/usePortfolioPreferences";
 import { AboutSection } from "./AboutSection";
 import { ContactSection } from "./ContactSection";
+import { DocumentsSection } from "./DocumentsSection";
 import { ExperienceSection } from "./ExperienceSection";
 import { HeroSection } from "./HeroSection";
 import { ProjectsSection } from "./ProjectsSection";
@@ -28,6 +29,7 @@ export function PortfolioPage() {
       <ProjectsSection language={language} copy={pageCopy} />
       <AboutSection language={language} copy={pageCopy} />
       <ExperienceSection language={language} copy={pageCopy} />
+      <DocumentsSection language={language} copy={pageCopy} />
       <ContactSection copy={pageCopy} />
       <SiteFooter copy={pageCopy} />
     </main>

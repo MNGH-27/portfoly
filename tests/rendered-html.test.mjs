@@ -36,8 +36,13 @@ test("server-renders the portfolio content", async () => {
     /<title>Mohsen Nouri — Full-Stack Software Developer<\/title>/i,
   );
   assert.match(html, /Full-Stack Software Developer/i);
+  assert.match(html, /Explore my work on GitHub/i);
   assert.match(html, /AI Chat RTL/i);
   assert.match(html, /Firefox Extension/i);
+  assert.match(html, /independent, persistent RTL controls/i);
+  assert.match(html, /Download extension/i);
+  assert.match(html, /Turborepo/i);
+  assert.match(html, /Storybook/i);
   assert.match(html, /Bonyad Maskan e-Services/i);
   assert.match(html, /Go \+ Node/i);
   assert.match(html, /Software Developer &amp; Team Leader/i);
@@ -45,4 +50,8 @@ test("server-renders the portfolio content", async () => {
   assert.match(html, /manager of a 20-person software team/i);
   assert.match(html, /Sirat 2/i);
   assert.match(html, /Feb 2024 — Present/i);
+  assert.match(html, /Resume and professional documents/i);
+  assert.match(html, /Mohsen Nouri — Resume/i);
+  assert.match(html, /Mohsen-Nouri-Resume\.pdf/i);
+  assert.match(html, /Updated July 2026/i);
 });
