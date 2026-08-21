@@ -50,12 +50,17 @@ export function ExperienceSection({ language, copy }: ExperienceSectionProps) {
                 <div className="experienceLinks">
                   {item.links.map((link) => (
                     <a
+                      className="button live"
                       href={link.href}
                       key={link.href}
                       target="_blank"
                       rel="noreferrer"
+                      aria-label={`${link.label[language]} — open live site`}
                     >
-                      {link.label[language]}
+                      <span className="linkLabel">{link.label[language]}</span>
+                      <span className="livePill" aria-hidden="true">
+                        ● Live
+                      </span>
                       <FiArrowUpRight aria-hidden="true" />
                     </a>
                   ))}

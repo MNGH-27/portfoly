@@ -18,10 +18,7 @@ export function ProjectsSection({ language, copy }: ProjectsSectionProps) {
         {projects.map((project) => {
           const Icon = project.icon;
           return (
-            <article
-              className="projectCard fadeUp"
-              key={project.title.en}
-            >
+            <article className="projectCard fadeUp" key={project.title.en}>
               <div className="projectCardHeader">
                 <span className="rowIcon" aria-hidden="true">
                   <Icon />
@@ -29,6 +26,11 @@ export function ProjectsSection({ language, copy }: ProjectsSectionProps) {
                 <span className="projectType">{project.type[language]}</span>
               </div>
               <h3>{project.title[language]}</h3>
+              {project.downloads && (
+                <p className="projectDownloads">
+                  <strong>{project.downloads[language]}</strong>
+                </p>
+              )}
               <p>{project.description[language]}</p>
               <ul className="projectHighlights">
                 {project.highlights.map((highlight) => (

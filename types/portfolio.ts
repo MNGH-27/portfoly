@@ -21,6 +21,7 @@ export interface Project {
     label: Localized;
     href: string;
   }>;
+  downloads?: Localized;
   icon: IconType;
 }
 

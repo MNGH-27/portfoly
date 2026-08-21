@@ -1,9 +1,4 @@
-import {
-  FiCalendar,
-  FiClock,
-  FiGlobe,
-  FiShoppingBag,
-} from "react-icons/fi";
+import { FiCalendar, FiClock, FiGlobe, FiShoppingBag } from "react-icons/fi";
 import {
   SiFirefoxbrowser,
   SiGo,
@@ -201,105 +196,6 @@ export const moreSkills: Localized[] = [
 
 export const projects: Project[] = [
   {
-    title: { en: "Oner Shop", fa: "فروشگاه Oner" },
-    type: {
-      en: "Full-Stack E-commerce · Monorepo",
-      fa: "فروشگاه فول‌استک · مونوریپو",
-    },
-    description: {
-      en: "An end-to-end commerce platform combining a Next.js storefront, React administration panel, NestJS API, and PostgreSQL database in one workspace.",
-      fa: "یک پلتفرم فروشگاهی کامل شامل فروشگاه Next.js، پنل مدیریت React، API مبتنی بر NestJS و دیتابیس PostgreSQL در یک workspace یکپارچه.",
-    },
-    highlights: [
-      {
-        en: "Built catalog, search, cart, coupon, authentication, profile, and variant-aware inventory flows.",
-        fa: "جریان‌های کاتالوگ، جستجو، سبد خرید، کد تخفیف، احراز هویت، پروفایل و موجودی مبتنی بر تنوع محصول را پیاده‌سازی کردم.",
-      },
-      {
-        en: "Created a responsive Persian admin panel for products, categories, orders, customers, banners, and coupons.",
-        fa: "یک پنل مدیریت فارسی و واکنش‌گرا برای محصولات، دسته‌بندی‌ها، سفارش‌ها، مشتریان، بنرها و کدهای تخفیف ساختم.",
-      },
-      {
-        en: "Designed JWT role-based access, Prisma data models, validated REST APIs, Swagger docs, and low-stock alerts.",
-        fa: "دسترسی نقش‌محور JWT، مدل‌های Prisma، REST API اعتبارسنجی‌شده، مستندات Swagger و هشدار کمبود موجودی را طراحی کردم.",
-      },
-    ],
-    stack: ["Next.js", "React", "NestJS", "Prisma", "PostgreSQL", "TypeScript"],
-    links: [
-      {
-        label: { en: "Source code", fa: "کد منبع" },
-        href: "https://github.com/MNGH-27/oner-shop-demo",
-      },
-    ],
-    icon: FiShoppingBag,
-  },
-  {
-    title: { en: "Task Scheduler Engine", fa: "موتور زمان‌بندی وظایف" },
-    type: {
-      en: "Concurrent & Distributed Systems · Go + Redis",
-      fa: "سیستم هم‌زمان و توزیع‌شده · Go + Redis",
-    },
-    description: {
-      en: "A Go scheduling library with a dependency-free in-memory engine and a Redis-backed distributed engine for durable, multi-worker job execution.",
-      fa: "یک کتابخانه زمان‌بندی با Go شامل موتور in-memory بدون وابستگی و موتور توزیع‌شده مبتنی بر Redis برای اجرای پایدار jobها میان چند worker.",
-    },
-    highlights: [
-      {
-        en: "Supports worker pools, delayed scheduling, four priority levels, aging-based fairness, and capacity backpressure.",
-        fa: "از worker pool، زمان‌بندی تأخیری، چهار سطح اولویت، fairness مبتنی بر aging و backpressure ظرفیت پشتیبانی می‌کند.",
-      },
-      {
-        en: "Handles retries with exponential backoff and jitter, per-attempt timeouts, cancellation, panic recovery, and graceful shutdown.",
-        fa: "retry با exponential backoff و jitter، timeout هر تلاش، لغو عملیات، بازیابی panic و graceful shutdown را مدیریت می‌کند.",
-      },
-      {
-        en: "Uses Redis atomic claims, heartbeats, leases, recovery, and cross-process cancellation for distributed execution.",
-        fa: "برای اجرای توزیع‌شده از claim اتمیک Redis، heartbeat، lease، recovery و لغو میان‌پردازه‌ای استفاده می‌کند.",
-      },
-    ],
-    stack: ["Go", "Redis", "Concurrency", "Distributed Systems", "Docker", "Testing"],
-    links: [
-      {
-        label: { en: "Source code", fa: "کد منبع" },
-        href: "https://github.com/MNGH-27/task-scheduler-GO",
-      },
-    ],
-    icon: FiClock,
-  },
-  {
-    title: { en: "TaskFlow API", fa: "API مدیریت وظایف TaskFlow" },
-    type: {
-      en: "Backend REST API · Go + MySQL",
-      fa: "REST API بک‌اند · Go + MySQL",
-    },
-    description: {
-      en: "A production-minded task management API built with Go and MySQL, packaged with Docker Compose and structured around clear HTTP, domain, and persistence layers.",
-      fa: "یک API مدیریت وظایف با رویکرد production-ready، ساخته‌شده با Go و MySQL و Docker Compose، با جداسازی روشن لایه‌های HTTP، دامنه و ذخیره‌سازی.",
-    },
-    highlights: [
-      {
-        en: "Implements task CRUD, completion filtering, input validation, and consistent JSON error responses.",
-        fa: "عملیات کامل CRUD، فیلتر وضعیت انجام‌شدن، اعتبارسنجی ورودی و پاسخ‌های خطای یکپارچه JSON را پیاده‌سازی می‌کند.",
-      },
-      {
-        en: "Separates repository contracts from MySQL persistence and tests handlers with a fast fake repository.",
-        fa: "قرارداد repository را از ذخیره‌سازی MySQL جدا می‌کند و handlerها را با یک fake repository سریع تست می‌کند.",
-      },
-      {
-        en: "Includes connection pooling, health checks, schema migration, request logging, graceful shutdown, and a multi-stage image.",
-        fa: "شامل connection pooling، health check، migration دیتابیس، ثبت درخواست‌ها، graceful shutdown و image چندمرحله‌ای است.",
-      },
-    ],
-    stack: ["Go", "MySQL", "Docker", "REST API", "SQL", "Testing"],
-    links: [
-      {
-        label: { en: "Source code", fa: "کد منبع" },
-        href: "https://github.com/MNGH-27/taskflow-api",
-      },
-    ],
-    icon: SiGo,
-  },
-  {
     title: { en: "Jalali Datepicker", fa: "انتخاب‌گر تاریخ جلالی" },
     type: {
       en: "Open-Source React Package · npm",
@@ -334,8 +230,120 @@ export const projects: Project[] = [
         href: "https://www.npmjs.com/package/@mngh/jalali-datepicker",
       },
     ],
+    downloads: {
+      en: "Over 1,000 downloads / week",
+      fa: "بیش از ۱۰۰۰ دانلود در هفته",
+    },
     icon: FiCalendar,
   },
+  {
+    title: { en: "Task Scheduler Engine", fa: "موتور زمان‌بندی وظایف" },
+    type: {
+      en: "Concurrent & Distributed Systems · Go + Redis",
+      fa: "سیستم هم‌زمان و توزیع‌شده · Go + Redis",
+    },
+    description: {
+      en: "A Go scheduling library with a dependency-free in-memory engine and a Redis-backed distributed engine for durable, multi-worker job execution.",
+      fa: "یک کتابخانه زمان‌بندی با Go شامل موتور in-memory بدون وابستگی و موتور توزیع‌شده مبتنی بر Redis برای اجرای پایدار jobها میان چند worker.",
+    },
+    highlights: [
+      {
+        en: "Supports worker pools, delayed scheduling, four priority levels, aging-based fairness, and capacity backpressure.",
+        fa: "از worker pool، زمان‌بندی تأخیری، چهار سطح اولویت، fairness مبتنی بر aging و backpressure ظرفیت پشتیبانی می‌کند.",
+      },
+      {
+        en: "Handles retries with exponential backoff and jitter, per-attempt timeouts, cancellation, panic recovery, and graceful shutdown.",
+        fa: "retry با exponential backoff و jitter، timeout هر تلاش، لغو عملیات، بازیابی panic و graceful shutdown را مدیریت می‌کند.",
+      },
+      {
+        en: "Uses Redis atomic claims, heartbeats, leases, recovery, and cross-process cancellation for distributed execution.",
+        fa: "برای اجرای توزیع‌شده از claim اتمیک Redis، heartbeat، lease، recovery و لغو میان‌پردازه‌ای استفاده می‌کند.",
+      },
+    ],
+    stack: [
+      "Go",
+      "Redis",
+      "Concurrency",
+      "Distributed Systems",
+      "Docker",
+      "Testing",
+    ],
+    links: [
+      {
+        label: { en: "Source code", fa: "کد منبع" },
+        href: "https://github.com/MNGH-27/task-scheduler-GO",
+      },
+    ],
+    icon: FiClock,
+  },
+  {
+    title: { en: "Oner Shop", fa: "فروشگاه Oner" },
+    type: {
+      en: "Full-Stack E-commerce · Monorepo",
+      fa: "فروشگاه فول‌استک · مونوریپو",
+    },
+    description: {
+      en: "An end-to-end commerce platform combining a Next.js storefront, React administration panel, NestJS API, and PostgreSQL database in one workspace.",
+      fa: "یک پلتفرم فروشگاهی کامل شامل فروشگاه Next.js، پنل مدیریت React، API مبتنی بر NestJS و دیتابیس PostgreSQL در یک workspace یکپارچه.",
+    },
+    highlights: [
+      {
+        en: "Built catalog, search, cart, coupon, authentication, profile, and variant-aware inventory flows.",
+        fa: "جریان‌های کاتالوگ، جستجو، سبد خرید، کد تخفیف، احراز هویت، پروفایل و موجودی مبتنی بر تنوع محصول را پیاده‌سازی کردم.",
+      },
+      {
+        en: "Created a responsive Persian admin panel for products, categories, orders, customers, banners, and coupons.",
+        fa: "یک پنل مدیریت فارسی و واکنش‌گرا برای محصولات، دسته‌بندی‌ها، سفارش‌ها، مشتریان، بنرها و کدهای تخفیف ساختم.",
+      },
+      {
+        en: "Designed JWT role-based access, Prisma data models, validated REST APIs, Swagger docs, and low-stock alerts.",
+        fa: "دسترسی نقش‌محور JWT، مدل‌های Prisma، REST API اعتبارسنجی‌شده، مستندات Swagger و هشدار کمبود موجودی را طراحی کردم.",
+      },
+    ],
+    stack: ["Next.js", "React", "NestJS", "Prisma", "PostgreSQL", "TypeScript"],
+    links: [
+      {
+        label: { en: "Source code", fa: "کد منبع" },
+        href: "https://github.com/MNGH-27/oner-shop-demo",
+      },
+    ],
+    icon: FiShoppingBag,
+  },
+
+  {
+    title: { en: "TaskFlow API", fa: "API مدیریت وظایف TaskFlow" },
+    type: {
+      en: "Backend REST API · Go + MySQL",
+      fa: "REST API بک‌اند · Go + MySQL",
+    },
+    description: {
+      en: "A production-minded task management API built with Go and MySQL, packaged with Docker Compose and structured around clear HTTP, domain, and persistence layers.",
+      fa: "یک API مدیریت وظایف با رویکرد production-ready، ساخته‌شده با Go و MySQL و Docker Compose، با جداسازی روشن لایه‌های HTTP، دامنه و ذخیره‌سازی.",
+    },
+    highlights: [
+      {
+        en: "Implements task CRUD, completion filtering, input validation, and consistent JSON error responses.",
+        fa: "عملیات کامل CRUD، فیلتر وضعیت انجام‌شدن، اعتبارسنجی ورودی و پاسخ‌های خطای یکپارچه JSON را پیاده‌سازی می‌کند.",
+      },
+      {
+        en: "Separates repository contracts from MySQL persistence and tests handlers with a fast fake repository.",
+        fa: "قرارداد repository را از ذخیره‌سازی MySQL جدا می‌کند و handlerها را با یک fake repository سریع تست می‌کند.",
+      },
+      {
+        en: "Includes connection pooling, health checks, schema migration, request logging, graceful shutdown, and a multi-stage image.",
+        fa: "شامل connection pooling، health check، migration دیتابیس، ثبت درخواست‌ها، graceful shutdown و image چندمرحله‌ای است.",
+      },
+    ],
+    stack: ["Go", "MySQL", "Docker", "REST API", "SQL", "Testing"],
+    links: [
+      {
+        label: { en: "Source code", fa: "کد منبع" },
+        href: "https://github.com/MNGH-27/taskflow-api",
+      },
+    ],
+    icon: SiGo,
+  },
+
   {
     title: { en: "AI Chat RTL", fa: "راست‌چین چت‌های هوش مصنوعی" },
     type: {
@@ -418,7 +426,10 @@ export const documents: DocumentItem[] = [
       en: "A concise overview of my full-stack skills, professional experience, leadership background, and selected projects.",
       fa: "نمایی خلاصه از مهارت‌های فول‌استک، تجربه حرفه‌ای، سابقه رهبری تیم و پروژه‌های منتخب من.",
     },
-    meta: { en: "PDF · 2 pages · Updated July 2026", fa: "PDF · ۲ صفحه · به‌روزرسانی ژوئیه ۲۰۲۶" },
+    meta: {
+      en: "PDF · 2 pages · Updated July 2026",
+      fa: "PDF · ۲ صفحه · به‌روزرسانی ژوئیه ۲۰۲۶",
+    },
     href: "./Mohsen-Nouri-Resume.pdf",
   },
 ];
@@ -476,6 +487,12 @@ export const experience: Experience[] = [
         fa: "پیاده‌سازی کش داده‌های پرتکرار برای کاهش بار سرور و زمان پاسخ‌گویی.",
       },
     ],
+    links: [
+      {
+        label: { en: "Bans (live)", fa: "بنس — لایو" },
+        href: "https://bans.ir/",
+      },
+    ],
   },
   {
     company: { en: "Dornica", fa: "درنیکا" },
@@ -492,6 +509,12 @@ export const experience: Experience[] = [
       {
         en: "Set development standards and oversaw planning, code reviews, and quality assurance.",
         fa: "تعریف استانداردهای توسعه و نظارت بر برنامه‌ریزی، بازبینی کد و تضمین کیفیت.",
+      },
+    ],
+    links: [
+      {
+        label: { en: "Dornica (live)", fa: "درنیکا — لایو" },
+        href: "https://dornica.net/",
       },
     ],
   },
@@ -522,6 +545,12 @@ export const experience: Experience[] = [
       {
         en: "Integrated Next.js server-side rendering to improve initial load performance and SEO.",
         fa: "پیاده‌سازی SSR در Next.js برای بهبود سرعت بارگذاری اولیه و SEO.",
+      },
+    ],
+    links: [
+      {
+        label: { en: "Roocket (live)", fa: "راکت — لایو" },
+        href: "https://roocket.ir/",
       },
     ],
   },
