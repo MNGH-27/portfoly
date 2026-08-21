@@ -46,12 +46,16 @@ test("server-renders the portfolio content", async () => {
   assert.match(html, /TaskFlow API/i);
   assert.match(html, /Backend REST API/i);
   assert.match(html, /connection pooling/i);
+  assert.match(html, /Jalali Datepicker/i);
+  assert.match(html, /Open-Source React Package/i);
+  assert.match(html, /no runtime date-library dependency/i);
+  assert.match(html, /View on npm/i);
   assert.match(html, /AI Chat RTL/i);
   assert.match(html, /Firefox Extension/i);
   assert.match(html, /independent, persistent RTL controls/i);
   assert.match(html, /Download extension/i);
-  assert.match(html, /Turborepo/i);
-  assert.match(html, /Storybook/i);
+  assert.doesNotMatch(html, /Monorepo Boilerplate/i);
+  assert.doesNotMatch(html, /Rasad Bonyad Maskan/i);
   assert.match(html, /Bonyad Maskan e-Services/i);
   assert.match(html, /Go \+ Node/i);
   assert.match(html, /Software Developer &amp; Team Leader/i);

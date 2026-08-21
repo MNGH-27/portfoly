@@ -1,7 +1,6 @@
 import {
-  FiBarChart2,
+  FiCalendar,
   FiClock,
-  FiCode,
   FiGlobe,
   FiShoppingBag,
 } from "react-icons/fi";
@@ -301,6 +300,43 @@ export const projects: Project[] = [
     icon: SiGo,
   },
   {
+    title: { en: "Jalali Datepicker", fa: "انتخاب‌گر تاریخ جلالی" },
+    type: {
+      en: "Open-Source React Package · npm",
+      fa: "پکیج متن‌باز React · npm",
+    },
+    description: {
+      en: "A published, fully typed Jalali date and time picker for React with native Date APIs, no runtime date-library dependency, and flexible UI primitives.",
+      fa: "یک انتخاب‌گر تاریخ و زمان جلالی منتشرشده برای React با تایپ کامل، API مبتنی بر Date بومی، بدون وابستگی اجرایی به کتابخانه‌های تاریخ و اجزای رابط منعطف.",
+    },
+    highlights: [
+      {
+        en: "Supports inline, popover, and modal layouts with single, range, and multiple-date selection.",
+        fa: "از نمایش inline، popover و modal همراه با انتخاب تکی، بازه‌ای و چندتاریخی پشتیبانی می‌کند.",
+      },
+      {
+        en: "Includes time selection, masked input, presets, Iranian holidays, event badges, and light/dark theming.",
+        fa: "انتخاب زمان، ورودی ماسک‌شده، presetها، تعطیلات ایران، نشان رویداد و تم روشن و تاریک را ارائه می‌دهد.",
+      },
+      {
+        en: "Exposes a headless hook and provides keyboard navigation, WAI-ARIA semantics, and automated tests.",
+        fa: "یک hook بدون رابط ارائه می‌کند و شامل ناوبری کیبورد، استانداردهای WAI-ARIA و تست‌های خودکار است.",
+      },
+    ],
+    stack: ["React", "TypeScript", "Vite", "Vitest", "WAI-ARIA", "npm"],
+    links: [
+      {
+        label: { en: "Source code", fa: "کد منبع" },
+        href: "https://github.com/MNGH-27/jalali-datepicker-package",
+      },
+      {
+        label: { en: "View on npm", fa: "مشاهده در npm" },
+        href: "https://www.npmjs.com/package/@mngh/jalali-datepicker",
+      },
+    ],
+    icon: FiCalendar,
+  },
+  {
     title: { en: "AI Chat RTL", fa: "راست‌چین چت‌های هوش مصنوعی" },
     type: {
       en: "Firefox Extension · TypeScript",
@@ -338,36 +374,6 @@ export const projects: Project[] = [
     icon: SiFirefoxbrowser,
   },
   {
-    title: { en: "Monorepo Boilerplate", fa: "قالب آماده مونوریپو" },
-    type: { en: "Full-Stack Architecture", fa: "معماری فول‌استک" },
-    description: {
-      en: "A reusable pnpm and Turborepo workspace for building Next.js products with a shared shadcn/ui component package and consistent tooling.",
-      fa: "یک workspace قابل استفاده مجدد با pnpm و Turborepo برای ساخت محصولات Next.js با پکیج مشترک shadcn/ui و ابزارهای یکپارچه.",
-    },
-    highlights: [
-      {
-        en: "Organizes applications and shared packages through a scalable workspace structure.",
-        fa: "اپلیکیشن‌ها و پکیج‌های مشترک را در یک ساختار workspace مقیاس‌پذیر سازمان‌دهی می‌کند.",
-      },
-      {
-        en: "Documents reusable UI components in an isolated Storybook application.",
-        fa: "کامپوننت‌های رابط قابل استفاده مجدد را در یک اپلیکیشن مستقل Storybook مستند می‌کند.",
-      },
-      {
-        en: "Centralizes TypeScript and ESLint configuration across the codebase.",
-        fa: "تنظیمات TypeScript و ESLint را در کل کدبیس متمرکز می‌کند.",
-      },
-    ],
-    stack: ["Next.js", "TypeScript", "Turborepo", "pnpm", "shadcn/ui", "Storybook"],
-    links: [
-      {
-        label: { en: "Source code", fa: "کد منبع" },
-        href: "https://github.com/MNGH-27/monorepo-boilerplate",
-      },
-    ],
-    icon: FiCode,
-  },
-  {
     title: {
       en: "Bonyad Maskan e-Services",
       fa: "خدمات الکترونیک بنیاد مسکن",
@@ -402,36 +408,6 @@ export const projects: Project[] = [
       },
     ],
     icon: FiGlobe,
-  },
-  {
-    title: { en: "Rasad Bonyad Maskan", fa: "رصد بنیاد مسکن" },
-    type: { en: "Frontend · BI Dashboard", fa: "فرانت‌اند · داشبورد BI" },
-    description: {
-      en: "Built and maintained a BI dashboard for senior management, turning live and aggregated data into clear, performant KPI and chart views.",
-      fa: "ساخت و نگهداری داشبورد BI برای مدیران ارشد و تبدیل داده‌های زنده و تجمیعی به نماهای سریع و روشن KPI و نمودارها.",
-    },
-    highlights: [
-      {
-        en: "Built dense management dashboards with KPI and chart-heavy views.",
-        fa: "داشبوردهای مدیریتی متراکم با نماهای KPI و نمودارمحور ساختم.",
-      },
-      {
-        en: "Turned live and aggregated datasets into decision-support visualizations.",
-        fa: "داده‌های زنده و تجمیعی را به مصورسازی‌های مناسب تصمیم‌گیری تبدیل کردم.",
-      },
-      {
-        en: "Maintained clear, stable interactions while rendering large datasets.",
-        fa: "هنگام نمایش دیتاست‌های بزرگ، تعاملات شفاف و پایدار را حفظ کردم.",
-      },
-    ],
-    stack: ["Next.js", "TypeScript", "Highcharts", "Chart.js"],
-    links: [
-      {
-        label: { en: "Live website", fa: "وب‌سایت زنده" },
-        href: "https://rasad.bonyadmaskan.ir/",
-      },
-    ],
-    icon: FiBarChart2,
   },
 ];
 
