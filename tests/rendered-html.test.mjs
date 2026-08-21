@@ -40,6 +40,9 @@ test("server-renders the portfolio content", async () => {
   assert.match(html, /Oner Shop/i);
   assert.match(html, /Full-Stack E-commerce/i);
   assert.match(html, /Prisma/i);
+  assert.match(html, /Task Scheduler Engine/i);
+  assert.match(html, /Concurrent &amp; Distributed Systems/i);
+  assert.match(html, /Redis atomic claims/i);
   assert.match(html, /TaskFlow API/i);
   assert.match(html, /Backend REST API/i);
   assert.match(html, /connection pooling/i);

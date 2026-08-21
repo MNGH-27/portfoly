@@ -1,4 +1,10 @@
-import { FiBarChart2, FiCode, FiGlobe, FiShoppingBag } from "react-icons/fi";
+import {
+  FiBarChart2,
+  FiClock,
+  FiCode,
+  FiGlobe,
+  FiShoppingBag,
+} from "react-icons/fi";
 import {
   SiFirefoxbrowser,
   SiGo,
@@ -227,6 +233,39 @@ export const projects: Project[] = [
       },
     ],
     icon: FiShoppingBag,
+  },
+  {
+    title: { en: "Task Scheduler Engine", fa: "موتور زمان‌بندی وظایف" },
+    type: {
+      en: "Concurrent & Distributed Systems · Go + Redis",
+      fa: "سیستم هم‌زمان و توزیع‌شده · Go + Redis",
+    },
+    description: {
+      en: "A Go scheduling library with a dependency-free in-memory engine and a Redis-backed distributed engine for durable, multi-worker job execution.",
+      fa: "یک کتابخانه زمان‌بندی با Go شامل موتور in-memory بدون وابستگی و موتور توزیع‌شده مبتنی بر Redis برای اجرای پایدار jobها میان چند worker.",
+    },
+    highlights: [
+      {
+        en: "Supports worker pools, delayed scheduling, four priority levels, aging-based fairness, and capacity backpressure.",
+        fa: "از worker pool، زمان‌بندی تأخیری، چهار سطح اولویت، fairness مبتنی بر aging و backpressure ظرفیت پشتیبانی می‌کند.",
+      },
+      {
+        en: "Handles retries with exponential backoff and jitter, per-attempt timeouts, cancellation, panic recovery, and graceful shutdown.",
+        fa: "retry با exponential backoff و jitter، timeout هر تلاش، لغو عملیات، بازیابی panic و graceful shutdown را مدیریت می‌کند.",
+      },
+      {
+        en: "Uses Redis atomic claims, heartbeats, leases, recovery, and cross-process cancellation for distributed execution.",
+        fa: "برای اجرای توزیع‌شده از claim اتمیک Redis، heartbeat، lease، recovery و لغو میان‌پردازه‌ای استفاده می‌کند.",
+      },
+    ],
+    stack: ["Go", "Redis", "Concurrency", "Distributed Systems", "Docker", "Testing"],
+    links: [
+      {
+        label: { en: "Source code", fa: "کد منبع" },
+        href: "https://github.com/MNGH-27/task-scheduler-GO",
+      },
+    ],
+    icon: FiClock,
   },
   {
     title: { en: "TaskFlow API", fa: "API مدیریت وظایف TaskFlow" },
