@@ -33,10 +33,10 @@ test("server-renders the portfolio content", async () => {
   assert.match(html, /<html[^>]*\bdata-theme="dark"/i);
   assert.match(
     html,
-    /<title>Mohsen Nouri — Full-Stack Software Developer<\/title>/i,
+    /<title>Mohsen Nouri — Software Engineer &amp; Developer<\/title>/i,
   );
   assert.match(html, /Full-Stack Software Developer/i);
-  assert.match(html, /Explore my work on GitHub/i);
+  assert.match(html, /The Developer’s Sanctuary/i);
   assert.match(html, /Oner Shop/i);
   assert.match(html, /Full-Stack E-commerce/i);
   assert.match(html, /Prisma/i);
@@ -57,14 +57,18 @@ test("server-renders the portfolio content", async () => {
   assert.doesNotMatch(html, /Monorepo Boilerplate/i);
   assert.doesNotMatch(html, /Rasad Bonyad Maskan/i);
   assert.match(html, /Bonyad Maskan e-Services/i);
-  assert.match(html, /Go \+ Node/i);
+  assert.match(html, /University of Tehran/i);
   assert.match(html, /Software Developer &amp; Team Leader/i);
   assert.match(html, /Shahid Rajaee University · Software Project Team/i);
   assert.match(html, /manager of a 20-person software team/i);
   assert.match(html, /Sirat 2/i);
   assert.match(html, /Feb 2024 — Present/i);
-  assert.match(html, /Resume and professional documents/i);
+  assert.match(html, /Development journey/i);
   assert.match(html, /Mohsen Nouri — Resume/i);
   assert.match(html, /Mohsen-Nouri-Resume\.pdf/i);
   assert.match(html, /Updated July 2026/i);
+  assert.match(html, /From Goroutines to Guarantees/i);
+  assert.match(html, /Backpressure is part of correctness/i);
+  assert.match(html, /Calendar UI Is a Systems Problem/i);
+  assert.match(html, /Accessibility changes the architecture/i);
 });
