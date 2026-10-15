@@ -35,8 +35,10 @@ export interface DocumentItem {
 export interface Experience {
   company: Localized;
   role: Localized;
+  displayTitle?: Localized;
   context?: Localized;
   teamNote?: Localized;
+  systems?: Localized[];
   date: Localized;
   highlights: Localized[];
   links?: Array<{

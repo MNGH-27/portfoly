@@ -136,7 +136,7 @@ function AboutPanel() {
       <section className="experienceShelf">
         <div className="shelfHeading"><FiBriefcase /> Selected experience</div>
         {experience.map((item) => (
-          <article key={`${item.company.en}-${item.date.en}`}><time>{item.date.en}</time><div><h4>{item.role.en}</h4><p>{item.company.en}</p>{item.teamNote ? <span>{item.teamNote.en}</span> : null}<ul>{item.highlights.map((highlight) => <li key={highlight.en}>{highlight.en}</li>)}</ul></div></article>
+          <article key={`${item.company.en}-${item.date.en}`}><time>{item.date.en}</time><div><h4>{item.displayTitle?.en ?? item.role.en}</h4><p>{item.displayTitle ? item.context?.en : item.company.en}</p>{item.teamNote ? <span>{item.teamNote.en}</span> : null}{item.systems ? <div className="experienceSystems" aria-label="Related systems">{item.systems.map((system) => <span key={system.en}>{system.en}</span>)}</div> : null}<ul>{item.highlights.map((highlight) => <li key={highlight.en}>{highlight.en}</li>)}</ul></div></article>
         ))}
       </section>
     </div>
@@ -146,7 +146,7 @@ function AboutPanel() {
 function ArchivePanel() {
   const records = useMemo(() => [
     ...projects.map((project, index) => ({ year: "PROJECT", ref: `P-${String(index + 1).padStart(3, "0")}`, title: project.title.en, text: project.type.en, tags: project.stack.slice(0, 3) })),
-    ...experience.map((item, index) => ({ year: item.date.en, ref: `E-${String(index + 1).padStart(3, "0")}`, title: item.role.en, text: item.company.en, tags: ["Experience"] })),
+    ...experience.map((item, index) => ({ year: item.date.en, ref: `E-${String(index + 1).padStart(3, "0")}`, title: item.displayTitle?.en ?? item.role.en, text: item.context?.en ?? item.company.en, tags: item.systems?.map((system) => system.en) ?? ["Experience"] })),
   ], []);
   return (
     <div className="archiveCabinet">
@@ -269,7 +269,7 @@ export function PortfolioPage() {
           <h3>Project systems</h3>
           {projects.map((project) => <article key={project.title.en}><h4>{project.title.en}</h4><strong>{project.type.en}</strong><p>{project.description.en}</p><ul>{project.highlights.map((item) => <li key={item.en}>{item.en}</li>)}</ul><p>{project.stack.join(" · ")}</p>{project.links.map((link) => <a href={link.href} key={link.href}>{link.label.en}</a>)}</article>)}
           <h3>Selected experience</h3>
-          {experience.map((item) => <article key={`${item.company.en}-fallback`}><h4>{item.role.en}</h4><p>{item.company.en} · {item.date.en}</p>{item.teamNote ? <p>{item.teamNote.en}</p> : null}<ul>{item.highlights.map((highlight) => <li key={highlight.en}>{highlight.en}</li>)}</ul>{item.links?.map((link) => <a href={link.href} key={link.href}>{link.label.en}</a>)}</article>)}
+          {experience.map((item) => <article key={`${item.company.en}-fallback`}><h4>{item.displayTitle?.en ?? item.role.en}</h4><p>{item.context?.en ?? item.company.en} · {item.date.en}</p>{item.teamNote ? <p>{item.teamNote.en}</p> : null}{item.systems ? <p>Systems: {item.systems.map((system) => system.en).join(" · ")}</p> : null}<ul>{item.highlights.map((highlight) => <li key={highlight.en}>{highlight.en}</li>)}</ul>{item.links?.map((link) => <a href={link.href} key={link.href}>{link.label.en}</a>)}</article>)}
           <h3>Technical articles</h3>
           {articles.map((article) => <article key={`${article.slug}-fallback`}><h4>{article.title}</h4><p>{article.summary}</p>{article.sections.map((section) => <section key={section.heading}><h5>{section.heading}</h5><p>{section.body}</p></section>)}</article>)}
           <h3>Resume and professional documents</h3>

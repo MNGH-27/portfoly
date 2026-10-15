@@ -437,31 +437,43 @@ export const documents: DocumentItem[] = [
 export const experience: Experience[] = [
   {
     company: {
-      en: "Shahid Rajaee University · Software Project Team",
-      fa: "دانشگاه تربیت دبیر شهید رجایی · تیم پروژه نرم‌افزار",
+      en: "Rajaee University",
+      fa: "دانشگاه رجایی",
     },
     role: {
-      en: "Software Developer & Team Leader",
-      fa: "توسعه‌دهنده نرم‌افزار و رهبر تیم",
+      en: "Software Development Team",
+      fa: "تیم توسعه نرم‌افزار",
+    },
+    displayTitle: {
+      en: "Rajaee University | Software Development Team",
+      fa: "دانشگاه رجایی | تیم توسعه نرم‌افزار",
     },
     context: {
-      en: "University-based collaboration delivering public-sector platforms",
-      fa: "همکاری دانشگاه‌محور برای توسعه سامانه‌های دولتی",
+      en: "Client: Iran's Ministry of Education",
+      fa: "کارفرما: وزارت آموزش و پرورش ایران",
     },
-    teamNote: {
-      en: "Hands-on contributor and manager of a 20-person software team",
-      fa: "عضو اجرایی و مدیر یک تیم نرم‌افزاری ۲۰ نفره",
-    },
-    date: { en: "Feb 2024 — Present", fa: "فوریه ۲۰۲۴ — اکنون" },
+    date: { en: "January 2024 — July 2026", fa: "ژانویه ۲۰۲۴ — ژوئیه ۲۰۲۶" },
     highlights: [
       {
-        en: "Directed delivery of public-sector platforms, including Sirat 2 for the Special Education Organization.",
-        fa: "هدایت تحویل سامانه‌های دولتی، از جمله سیرت ۲ برای سازمان آموزش‌وپرورش استثنایی.",
+        en: "Led frontend development of React.js and Next.js applications for educational projects commissioned by the Ministry of Education.",
+        fa: "رهبری توسعه فرانت‌اند اپلیکیشن‌های React.js و Next.js برای پروژه‌های آموزشی سفارش‌داده‌شده توسط وزارت آموزش و پرورش.",
       },
       {
-        en: "Build data-heavy React and Next.js dashboards and support secure CI/CD practices with DevOps.",
-        fa: "ساخت داشبوردهای داده‌محور با React و Next.js و همکاری با DevOps برای CI/CD امن.",
+        en: "Designed reusable component architectures and established consistent frontend development practices.",
+        fa: "طراحی معماری کامپوننت‌های قابل استفاده مجدد و ایجاد رویه‌های یکپارچه توسعه فرانت‌اند.",
       },
+      {
+        en: "Collaborated with backend developers and team members to deliver reliable, production-ready applications.",
+        fa: "همکاری با توسعه‌دهندگان بک‌اند و اعضای تیم برای تحویل اپلیکیشن‌های قابل‌اعتماد و آماده تولید.",
+      },
+      {
+        en: "Contributed to architectural decisions, code reviews, and frontend code quality.",
+        fa: "مشارکت در تصمیم‌های معماری، بازبینی کد و ارتقای کیفیت کد فرانت‌اند.",
+      },
+    ],
+    systems: [
+      { en: "Sirat 2", fa: "سیرت ۲" },
+      { en: "Tutak", fa: "توتک" },
     ],
     links: [
       {
@@ -524,8 +536,8 @@ export const experience: Experience[] = [
     date: { en: "May 2021 — Apr 2022", fa: "مه ۲۰۲۱ — آوریل ۲۰۲۲" },
     highlights: [
       {
-        en: "Built Next.js and TypeScript features for Shahid Rajaee Teacher Training University.",
-        fa: "توسعه قابلیت‌های Next.js و TypeScript برای دانشگاه تربیت دبیر شهید رجایی.",
+        en: "Built Next.js and TypeScript features for Rajaee University.",
+        fa: "توسعه قابلیت‌های Next.js و TypeScript برای دانشگاه رجایی.",
       },
       {
         en: "Delivered a React PWA with IndexedDB and custom JavaScript solutions for public and enterprise clients.",

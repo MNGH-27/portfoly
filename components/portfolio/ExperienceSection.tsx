@@ -37,6 +37,11 @@ export function ExperienceSection({ language, copy }: ExperienceSectionProps) {
                     {item.teamNote[language]}
                   </span>
                 ) : null}
+                {item.systems?.length ? (
+                  <span className="experienceTeamNote">
+                    {item.systems.map((system) => system[language]).join(" · ")}
+                  </span>
+                ) : null}
               </div>
               <time>{item.date[language]}</time>
             </div>

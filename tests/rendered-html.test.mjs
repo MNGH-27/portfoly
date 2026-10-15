@@ -58,11 +58,13 @@ test("server-renders the portfolio content", async () => {
   assert.doesNotMatch(html, /Rasad Bonyad Maskan/i);
   assert.match(html, /Bonyad Maskan e-Services/i);
   assert.match(html, /University of Tehran/i);
-  assert.match(html, /Software Developer &amp; Team Leader/i);
-  assert.match(html, /Shahid Rajaee University · Software Project Team/i);
-  assert.match(html, /manager of a 20-person software team/i);
+  assert.match(html, /Rajaee University \| Software Development Team/i);
+  assert.match(html, /Client: Iran&#x27;s Ministry of Education/i);
+  assert.match(html, /Led frontend development of React\.js and Next\.js applications/i);
+  assert.doesNotMatch(html, /Shahid/i);
   assert.match(html, /Sirat 2/i);
-  assert.match(html, /Feb 2024 — Present/i);
+  assert.match(html, /Tutak/i);
+  assert.match(html, /January 2024 — July 2026/i);
   assert.match(html, /Development journey/i);
   assert.match(html, /Mohsen Nouri — Resume/i);
   assert.match(html, /Mohsen-Nouri-Resume\.pdf/i);
