@@ -23,35 +23,53 @@ const navigation: Array<{ id: PanelId; label: string; detail: string; icon: type
 const articles = [
   {
     slug: "reliable-task-scheduler-go",
-    index: "NOTE / 001",
-    title: "Reliable Job Systems: Backpressure, Idempotency, Retries, and Leases",
-    summary: "A practical guide to the guarantees behind dependable background work: bounded load, safe repetition, controlled recovery, and ownership that can expire.",
-    readTime: "9 min read",
+    index: "ESSAY / 001",
+    title: "How to Design Background Jobs That Survive Real Failure",
+    summary: "Queues move work out of the request path. Reliability begins when we decide what should happen after duplicates, crashes, overload, and uncertain outcomes.",
+    published: "October 2026",
+    readTime: "12 min read",
     tags: ["System design", "Queues", "Reliability", "Distributed systems"],
-    sections: [
-      { heading: "Define invariants before choosing infrastructure", body: "A reliable job system begins with rules that must remain true: accepted work is not silently lost, concurrency never exceeds a known limit, a job has at most one valid owner at a time, and completion can be recorded more than once without corrupting state. These invariants are more useful than starting with a queue product or worker framework because they tell you what must be atomic, durable, and observable." },
-      { heading: "Backpressure converts overload into a policy", body: "Throughput and latency are connected: the number of jobs in a system is approximately the arrival rate multiplied by the time each job spends there. If arrivals exceed service capacity, an unbounded queue only postpones failure while memory use and waiting time grow. A bounded queue forces an explicit decision: block producers, reject new work, shed low-priority work, or spill to durable storage. The correct choice depends on whether freshness, completeness, or producer latency matters most." },
-      { heading: "Retries create traffic, so budget them", body: "A retry is a new request and therefore additional load on a dependency that may already be unhealthy. Use per-attempt timeouts, exponential backoff, random jitter, and a maximum attempt or elapsed-time budget. Retry only failures likely to be transient; validation errors and permanent authorization failures should fail immediately. A retry budget also prevents one failing operation from consuming all worker capacity." },
-      { heading: "Idempotency makes at-least-once delivery usable", body: "Most practical queues provide at-least-once delivery, so the same job may run twice after a timeout or worker crash. Give each logical operation an idempotency key and enforce it at the side-effect boundary with a unique constraint, compare-and-set update, or transactional outbox. Deduplicating only in worker memory is insufficient because the process that remembers the key can disappear." },
-      { heading: "Leases need fencing, not only heartbeats", body: "A lease lets ownership expire when a worker stops renewing it, but an old worker may resume after a long pause and still write stale results. Attach a monotonically increasing fencing token to every claim and reject writes from older tokens. Renew well before expiry, recover only after the lease is certainly stale, and make the claim-and-token update atomic. Heartbeats detect liveness; fencing protects correctness." },
-      { heading: "Test transitions and failure windows", body: "Test the job state machine rather than only the happy-path handler. Important cases include a crash after the side effect but before acknowledgement, cancellation during backoff, lease expiry during a long task, duplicate delivery, clock skew, queue saturation, and shutdown with work in flight. A controllable clock and fault-injectable storage adapter make these cases deterministic instead of flaky integration tests." },
+    opening: [
+      "A background job looks simple when drawn as three boxes: a producer writes to a queue, a worker receives a message, and the worker performs the task. The diagram hides the difficult part. Networks time out, processes stop between two writes, dependencies recover slowly, and the same message can arrive more than once.",
+      "The useful question is therefore not “Which queue should I use?” It is “Which guarantees must remain true when every step can fail?” Once those guarantees are explicit, implementation choices become easier to evaluate.",
     ],
+    callout: "Queues do not create correctness. They create time and distance in which correctness must be designed.",
+    sections: [
+      { heading: "Start with invariants, not infrastructure", body: ["An invariant is a rule the system must preserve even when execution is interrupted. Useful examples are: accepted work is not silently lost, no more than N expensive jobs run at once, only the newest owner may commit a result, and repeating a completed operation does not duplicate its effect.", "These rules reveal where atomicity is required. If creating an order and publishing its event must succeed together, a queue product alone cannot close the gap. A transactional outbox can: store the business change and an outgoing event in one database transaction, then publish the event asynchronously."] },
+      { heading: "Backpressure is a product decision", body: ["When work arrives faster than workers can complete it, waiting time grows. An unbounded queue makes the system appear healthy while latency and storage quietly accumulate. Eventually the queue becomes a record of demand the service can no longer satisfy.", "A bounded system makes overload visible and forces a policy. Producers can wait, low-priority work can be rejected, requests can be sampled, or jobs can move to durable overflow storage. The right choice depends on what the product values most: freshness, completeness, or immediate acceptance."] },
+      { heading: "Treat retries as new traffic", body: ["A retry is another request sent to a dependency that may already be unhealthy. Immediate retries synchronize workers into a second traffic spike, sometimes called a retry storm. Exponential backoff spreads attempts over time; jitter prevents every worker from waking at the same moment.", "Every retry policy also needs a budget. Limit attempts or total elapsed time, use a timeout for each attempt, and retry only failures likely to be temporary. Invalid input and permanent authorization errors should fail immediately. Exhausted jobs belong in a dead-letter path with enough context to diagnose and replay them safely."] },
+      { heading: "Idempotency belongs at the side-effect boundary", body: ["Most practical queues provide at-least-once delivery. A worker may finish charging a card and crash before acknowledging the message, so the queue delivers it again. The second execution is not an edge case; it is part of the delivery contract.", "Give each logical operation an idempotency key and enforce it where the effect becomes durable. A database unique constraint, compare-and-set update, or provider-supported idempotency key can turn a repeated request into the same recorded result. An in-memory set is insufficient because the process holding that memory can disappear."] },
+      { heading: "A lease needs a fencing token", body: ["A lease allows ownership to expire when a worker stops sending heartbeats. But expiry does not stop an old worker from resuming after a long pause and writing a stale result. Two workers can temporarily believe they own the same job.", "Attach a monotonically increasing fencing token to each claim. Every protected write carries the token, and storage rejects tokens older than the most recently accepted value. Heartbeats answer whether an owner appears alive; fencing decides whether that owner is still allowed to write."] },
+      { heading: "Test the gaps between steps", body: ["Happy-path tests prove the handler works. Reliability tests prove the protocol survives interruption. Crash the worker after the side effect but before acknowledgement. Expire a lease during a long operation. Deliver the same message twice. Fill the queue. Cancel during backoff. Shut down with work in flight.", "A controllable clock and fault-injectable storage adapter make these situations deterministic. The goal is to test state transitions and recovery rules, not to hope that a slow integration test happens to fail at the interesting millisecond."] },
+    ],
+    code: { label: "A minimal state model", body: `pending → running(token: 41) → completed\n             ↘ retryable → pending\n             ↘ exhausted → dead-letter\n\nwrite(result, token) only if token >= latest_token` },
+    checklist: ["Define the delivery guarantee", "Bound concurrency and queue growth", "Budget retries with backoff and jitter", "Enforce idempotency in durable storage", "Fence stale owners", "Observe queue age, failures, and dead letters"],
+    conclusion: "A dependable job system is not one that never fails. It is one that makes failure an ordinary, bounded state transition. Once overload, duplication, and ownership are explicit parts of the model, the system becomes easier to operate—and much harder to surprise.",
   },
   {
     slug: "accessible-jalali-datepicker",
-    index: "NOTE / 002",
-    title: "Accessible Date Pickers: State Machines, Focus Models, and Calendar Math",
-    summary: "A technical guide to separating calendar rules from interface state, designing predictable selection modes, and making grid navigation work for keyboard and screen-reader users.",
-    readTime: "8 min read",
+    index: "ESSAY / 002",
+    title: "A Date Picker Is Three Systems Wearing One Interface",
+    summary: "Reliable date pickers separate calendar mathematics, selection rules, and interaction behavior. Mixing them is how small UI bugs become data bugs.",
+    published: "October 2026",
+    readTime: "11 min read",
     tags: ["Accessibility", "State machines", "Date handling", "UI architecture"],
-    sections: [
-      { heading: "Use one canonical date model", body: "A date picker may display Jalali fields, accept localized digits, and return a JavaScript Date, but its internal comparisons need one canonical representation. A calendar-only value is safest as a tuple such as calendar, year, month, and day, converted to an absolute day number for ordering and range checks. Introduce time zones only when a time-of-day is present; treating local midnight as a universal instant creates off-by-one-day bugs around offsets and daylight-saving changes." },
-      { heading: "Model selection as explicit transitions", body: "Single, range, and multiple selection have different legal transitions. A range picker, for example, moves from empty to start-selected to complete; choosing a date before the start must either restart the range or normalize the endpoints according to a documented rule. Represent these states explicitly and derive visual flags such as selected, range-start, in-range, and range-end from state instead of storing duplicate booleans on each cell." },
-      { heading: "Choose a stable keyboard focus model", body: "A calendar grid should expose one tab stop, not forty-two. Use roving tabindex or aria-activedescendant so arrow keys move by day, Home and End move within a week, Page Up and Page Down change months, Enter or Space selects, and Escape closes a popover. When navigation changes the visible month, move focus to the corresponding date and announce the new month without forcing screen-reader users to traverse the grid again." },
-      { heading: "Parsing is not validation", body: "Text input has intermediate states such as an incomplete year or a trailing separator. Parsing should describe what the user typed; validation should decide whether the completed value exists, is inside the allowed range, and satisfies business rules. Keep the draft string separate from the committed date so typing does not constantly rewrite the input. On commit, return structured errors such as invalid format, nonexistent date, or unavailable date instead of a single false value." },
-      { heading: "Express availability as composable rules", body: "Disabled dates, minimum and maximum bounds, holidays, and booking availability should be pure predicates over the canonical date. Compose them in a documented order and expose the reason a date is unavailable so the UI can explain it. For ranges, decide whether unavailable dates block the whole interval or merely cannot be endpoints; leaving that rule implicit produces surprising selections." },
-      { heading: "Test behavior as a matrix", body: "Calendar correctness is the product of several dimensions: calendar system, locale, digit set, selection mode, keyboard path, boundary month, disabled rule, and rendering mode. Build a compact matrix that covers the intersections most likely to fail, then add property tests for conversion round trips and date ordering. Accessibility tests should verify focus movement and accessible names, while browser tests cover popover focus return and interaction with real assistive semantics." },
+    opening: [
+      "A date picker is often treated as a formatted text field with a calendar attached. In reality it combines three different systems: a calendar model, a selection state machine, and an accessible interaction model. Each has its own rules and failure modes.",
+      "The component becomes easier to reason about when those concerns meet through small, explicit interfaces. Calendar math answers what a date means. Selection logic answers which transitions are legal. The view answers how a person can perceive and operate those transitions.",
     ],
+    callout: "A date is domain data. A focused cell is interface state. A formatted string is presentation. They should not be the same variable.",
+    sections: [
+      { heading: "Choose a canonical calendar value", body: ["A calendar-only value is not an instant in time. If the user selects 1405/07/24, converting it immediately to local midnight in a JavaScript Date introduces a time zone that the user never chose. Serialization in another zone can then move the value to the previous day.", "Represent calendar dates explicitly—calendar, year, month, and day—and convert them to an absolute day number when ordering or range comparison is required. Add time zones only when the domain includes a time of day. Formatting should sit at the edge, not define the stored value."] },
+      { heading: "Make selection a state machine", body: ["Single, range, and multiple selection are different protocols. A range picker moves from empty, to start selected, to complete. If the second date precedes the first, the product must deliberately restart the range, swap the endpoints, or reject the transition.", "Store the selection state and derive cell appearance from it. Flags such as selected, range-start, in-range, and range-end should not be independent mutable booleans. Derived state removes combinations that should never exist, such as a cell marked both outside and inside the selected range."] },
+      { heading: "Design one predictable focus path", body: ["A six-week calendar may render forty-two day buttons, but it should not add forty-two stops to the Tab key. Use roving tabindex or aria-activedescendant so the grid contributes one tab stop and arrow keys move within it.", "Arrow keys move by day, Home and End move within the week, Page Up and Page Down change months, Enter or Space selects, and Escape closes the popover. When the month changes, keep focus on the corresponding date when possible and announce the new month through a polite live region."] },
+      { heading: "Separate parsing from validation", body: ["People type incomplete values: a year with two digits, a trailing separator, or localized numerals that have not yet formed a date. Parsing should describe the current text. Validation should decide whether a completed value exists and satisfies the domain rules.", "Keep the draft string separate from the committed date. Validate on an intentional boundary such as blur, Enter, or form submission, then return a structured reason: invalid format, nonexistent date, outside allowed range, or unavailable date. A single false value cannot produce a useful message."] },
+      { heading: "Treat availability as policy", body: ["Minimum and maximum dates, weekends, holidays, and server-provided availability are business rules. Express them as composable predicates over the canonical date, and return both the decision and a reason the interface can communicate.", "Ranges require one more policy: can an interval cross an unavailable date, or must every day inside it be available? A component cannot infer the product’s answer. Put the rule in the selection layer so mouse, keyboard, and text entry all behave consistently."] },
+      { heading: "Test combinations, not isolated features", body: ["Calendar bugs live at intersections: the last day of a month in a right-to-left locale, a disabled date reached by keyboard, a range crossing a year boundary, or a conversion performed near a daylight-saving transition.", "Build a compact test matrix across calendar, locale, digit set, selection mode, navigation method, and boundary dates. Property tests are especially useful for conversion round trips and ordering. Browser tests should verify focus return when the popover closes and accessible names as the visible month changes."] },
+    ],
+    code: { label: "Keep the boundaries explicit", body: `CalendarValue  → comparison and conversion\nSelectionState → legal transitions\nFocusState     → keyboard navigation\nDraftText      → parsing and feedback\n\nView = derive(CalendarValue, SelectionState, FocusState)` },
+    checklist: ["Store calendar dates without accidental time zones", "Make selection transitions explicit", "Expose one stable tab stop", "Keep draft text separate from committed data", "Return reasons for unavailable dates", "Test locale, boundary, and input combinations"],
+    conclusion: "The best date picker is not the one with the most options. It is the one whose rules stay coherent across typing, clicking, keyboard navigation, localization, and serialization. Clear boundaries make that coherence possible.",
   },
 ];
 
@@ -176,18 +194,23 @@ function ArticlesPanel() {
       </aside>
       <article className="longformArticle" key={article.slug}>
         <header>
-          <div><span>{article.index}</span><span>{article.readTime}</span></div>
+          <div><span>{article.index}</span><span>{article.published}</span></div>
           <h3>{article.title}</h3>
-          <p>{article.summary}</p>
+          <p className="articleDek">{article.summary}</p>
+          <div className="articleByline"><span className="authorMark">MN</span><div><strong>Mohsen Nouri</strong><small>Software Engineer · {article.readTime}</small></div></div>
           <div className="articleTags">{article.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
         </header>
+        <div className="articleOpening">{article.opening.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}</div>
+        <blockquote>{article.callout}</blockquote>
         {article.sections.map((section, index) => (
           <section key={section.heading}>
             <span>{String(index + 1).padStart(2, "0")}</span>
-            <div><h4>{section.heading}</h4><p>{section.body}</p></div>
+            <div><h4>{section.heading}</h4>{section.body.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}</div>
           </section>
         ))}
-        <footer>A practical reference: principles, failure modes, and implementation choices that can be applied beyond a single project.</footer>
+        <figure className="articleCode"><figcaption>{article.code.label}</figcaption><pre><code>{article.code.body}</code></pre></figure>
+        <section className="articleChecklist"><span>✓</span><div><h4>Practical checklist</h4><ul>{article.checklist.map((item) => <li key={item}>{item}</li>)}</ul></div></section>
+        <footer><strong>The takeaway</strong><p>{article.conclusion}</p></footer>
       </article>
     </div>
   );
@@ -273,7 +296,7 @@ export function PortfolioPage() {
           <h3>Selected experience</h3>
           {experience.map((item) => <article key={`${item.company.en}-fallback`}><h4>{item.displayTitle?.en ?? item.role.en}</h4><p>{item.context?.en ?? item.company.en} · {item.date.en}</p>{item.teamNote ? <p>{item.teamNote.en}</p> : null}{item.systems ? <p>Systems: {item.systems.map((system) => system.en).join(" · ")}</p> : null}<ul>{item.highlights.map((highlight) => <li key={highlight.en}>{highlight.en}</li>)}</ul>{item.links?.map((link) => <a href={link.href} key={link.href}>{link.label.en}</a>)}</article>)}
           <h3>Technical articles</h3>
-          {articles.map((article) => <article key={`${article.slug}-fallback`}><h4>{article.title}</h4><p>{article.summary}</p>{article.sections.map((section) => <section key={section.heading}><h5>{section.heading}</h5><p>{section.body}</p></section>)}</article>)}
+          {articles.map((article) => <article key={`${article.slug}-fallback`}><h4>{article.title}</h4><p>{article.summary}</p>{article.opening.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}<blockquote>{article.callout}</blockquote>{article.sections.map((section) => <section key={section.heading}><h5>{section.heading}</h5>{section.body.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}</section>)}<pre>{article.code.body}</pre><h5>Practical checklist</h5><ul>{article.checklist.map((item) => <li key={item}>{item}</li>)}</ul><h5>The takeaway</h5><p>{article.conclusion}</p></article>)}
           <h3>Resume and professional documents</h3>
           <a href={documents[0].href}>{documents[0].title.en} · {documents[0].meta.en}</a>
         </section>
