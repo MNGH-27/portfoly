@@ -3,23 +3,23 @@
 import { useEffect, useMemo, useState } from "react";
 import {
   FiArrowRight, FiArrowUpRight, FiBookOpen, FiBox, FiBriefcase, FiCode,
-  FiCommand, FiCpu, FiDatabase, FiDownload, FiEdit3, FiFileText, FiGithub, FiGrid,
+  FiCommand, FiCpu, FiDatabase, FiDownload, FiFileText, FiGithub, FiGrid,
   FiLayers, FiLinkedin, FiMail, FiMapPin, FiServer, FiTerminal, FiX, FiZap,
 } from "react-icons/fi";
 import { CONTACT, documents, experience, projects } from "@/data/portfolio";
 import type { Project } from "@/types/portfolio";
 
-type PanelId = "projects" | "engineering" | "about" | "archive" | "articles" | "contact";
+type PanelId = "projects" | "engineering" | "about" | "archive" | "contact";
 
 const navigation: Array<{ id: PanelId; label: string; detail: string; icon: typeof FiGrid }> = [
   { id: "projects", label: "Project systems", detail: "Computer", icon: FiCpu },
   { id: "engineering", label: "Engineering notes", detail: "Notebook", icon: FiBookOpen },
   { id: "about", label: "Profile & education", detail: "Bookshelf", icon: FiGrid },
   { id: "archive", label: "Development archive", detail: "Desk files", icon: FiBox },
-  { id: "articles", label: "Technical articles", detail: "Reading desk", icon: FiEdit3 },
   { id: "contact", label: "Open a channel", detail: "Contact", icon: FiMail },
 ];
 
+/* Article publishing is intentionally paused; the portfolio no longer exposes this section.
 const articles = [
   {
     slug: "reliable-task-scheduler-go",
@@ -72,6 +72,7 @@ const articles = [
     conclusion: "The best date picker is not the one with the most options. It is the one whose rules stay coherent across typing, clicking, keyboard navigation, localization, and serialization. Clear boundaries make that coherence possible.",
   },
 ];
+*/
 
 const engineeringNotes = [
   { title: "Backend development", code: "01 / SYSTEMS", icon: FiServer, body: "Designing services around explicit boundaries, predictable failure modes, and maintainable operational behavior.", details: ["Go & Node.js", "Validation and error design", "Testing and graceful shutdown"] },
@@ -177,6 +178,7 @@ function ArchivePanel() {
   );
 }
 
+/*
 function ArticlesPanel() {
   const [selected, setSelected] = useState(0);
   const article = articles[selected];
@@ -215,6 +217,7 @@ function ArticlesPanel() {
     </div>
   );
 }
+*/
 
 function ContactPanel() {
   return (
@@ -232,14 +235,14 @@ function ContactPanel() {
 
 function Panel({ panel, onClose }: { panel: PanelId; onClose: () => void }) {
   const labels: Record<PanelId, [string, string]> = {
-    projects: ["Computer terminal", "Project systems"], engineering: ["Technical notebook", "Engineering notes"], about: ["Library index", "Profile & education"], archive: ["Desk archive", "Development journey"], articles: ["Reading desk", "Technical articles"], contact: ["Secure channel", "Contact"],
+    projects: ["Computer terminal", "Project systems"], engineering: ["Technical notebook", "Engineering notes"], about: ["Library index", "Profile & education"], archive: ["Desk archive", "Development journey"], contact: ["Secure channel", "Contact"],
   };
   return (
     <div className="panelLayer" role="dialog" aria-modal="true" aria-labelledby="panel-title">
       <button className="panelBackdrop" onClick={onClose} aria-label="Close panel" />
       <section className={`archivePanel panel-${panel}`}>
         <header className="panelHeader"><div><span>{labels[panel][0]}</span><h2 id="panel-title">{labels[panel][1]}</h2></div><button type="button" onClick={onClose} aria-label="Close panel"><FiX /></button></header>
-        <div className="panelBody">{panel === "projects" ? <ProjectsPanel /> : null}{panel === "engineering" ? <EngineeringPanel /> : null}{panel === "about" ? <AboutPanel /> : null}{panel === "archive" ? <ArchivePanel /> : null}{panel === "articles" ? <ArticlesPanel /> : null}{panel === "contact" ? <ContactPanel /> : null}</div>
+        <div className="panelBody">{panel === "projects" ? <ProjectsPanel /> : null}{panel === "engineering" ? <EngineeringPanel /> : null}{panel === "about" ? <AboutPanel /> : null}{panel === "archive" ? <ArchivePanel /> : null}{panel === "contact" ? <ContactPanel /> : null}</div>
       </section>
     </div>
   );
@@ -261,7 +264,6 @@ function Workspace({ onSelect }: { onSelect: (panel: PanelId) => void }) {
       <div className="deskLamp" aria-hidden="true"><i /><b /></div><div className="deskSurface" aria-hidden="true" />
       <button className="sceneObject monitor" onClick={() => onSelect("projects")} aria-label="Open project systems on the computer"><span className="objectHint">Computer <small>Project systems</small></span><div className="screen"><div className="screenBar"><i /><i /><i /><span>~/portfolio/systems</span></div><div className="screenCode"><small>01</small><span className="codeGold">package</span> main<br /><small>02</small><span className="codeTeal">func</span> build() System &#123;<br /><small>03</small>&nbsp;&nbsp;<span className="codeMuted">return</span> reliableSoftware<br /><small>04</small>&#125;<b>_</b></div><div className="screenStatus">6 systems indexed <span>● online</span></div></div><div className="monitorStand" /></button>
       <button className="sceneObject notebook" onClick={() => onSelect("engineering")} aria-label="Open engineering notes in the notebook"><span className="objectHint">Notebook <small>Engineering notes</small></span><div className="paperLines" /><strong>Systems<br />&amp; structure</strong><i /><i /><i /></button>
-      <button className="sceneObject articleStack" onClick={() => onSelect("articles")} aria-label="Open technical articles on the reading desk"><span className="objectHint">Reading desk <small>Technical articles</small></span><i>TECH<br />GUIDES</i><b>02</b></button>
       <button className="sceneObject archiveDrawers" onClick={() => onSelect("archive")} aria-label="Open the development archive"><span className="objectHint">Desk archive <small>Development journey</small></span><i><b /></i><i><b /></i><i><b /></i></button>
       <div className="keyboard" aria-hidden="true"><i /><i /><i /><i /><i /><i /><i /><i /><i /></div><div className="coffee" aria-hidden="true"><span /></div><div className="roomFloor" aria-hidden="true" />
     </div>
@@ -295,8 +297,6 @@ export function PortfolioPage() {
           {projects.map((project) => <article key={project.title.en}><h4>{project.title.en}</h4><strong>{project.type.en}</strong><p>{project.description.en}</p><ul>{project.highlights.map((item) => <li key={item.en}>{item.en}</li>)}</ul><p>{project.stack.join(" · ")}</p>{project.links.map((link) => <a href={link.href} key={link.href}>{link.label.en}</a>)}</article>)}
           <h3>Selected experience</h3>
           {experience.map((item) => <article key={`${item.company.en}-fallback`}><h4>{item.displayTitle?.en ?? item.role.en}</h4><p>{item.context?.en ?? item.company.en} · {item.date.en}</p>{item.teamNote ? <p>{item.teamNote.en}</p> : null}{item.systems ? <p>Systems: {item.systems.map((system) => system.en).join(" · ")}</p> : null}<ul>{item.highlights.map((highlight) => <li key={highlight.en}>{highlight.en}</li>)}</ul>{item.links?.map((link) => <a href={link.href} key={link.href}>{link.label.en}</a>)}</article>)}
-          <h3>Technical articles</h3>
-          {articles.map((article) => <article key={`${article.slug}-fallback`}><h4>{article.title}</h4><p>{article.summary}</p>{article.opening.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}<blockquote>{article.callout}</blockquote>{article.sections.map((section) => <section key={section.heading}><h5>{section.heading}</h5>{section.body.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}</section>)}<pre>{article.code.body}</pre><h5>Practical checklist</h5><ul>{article.checklist.map((item) => <li key={item}>{item}</li>)}</ul><h5>The takeaway</h5><p>{article.conclusion}</p></article>)}
           <h3>Resume and professional documents</h3>
           <a href={documents[0].href}>{documents[0].title.en} · {documents[0].meta.en}</a>
         </section>

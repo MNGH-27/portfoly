@@ -72,15 +72,9 @@ test("server-renders the portfolio content", async () => {
   assert.match(html, /Mohsen Nouri — Resume/i);
   assert.match(html, /Mohsen-Nouri-Resume\.pdf/i);
   assert.match(html, /Updated July 2026/i);
-  assert.match(html, /How to Design Background Jobs That Survive Real Failure/i);
-  assert.match(html, /Queues do not create correctness/i);
-  assert.match(html, /Idempotency belongs at the side-effect boundary/i);
-  assert.match(html, /A lease needs a fencing token/i);
-  assert.match(html, /A Date Picker Is Three Systems Wearing One Interface/i);
-  assert.match(html, /Separate parsing from validation/i);
-  assert.match(html, /Test combinations, not isolated features/i);
-  assert.match(html, /Practical checklist/i);
-  assert.match(html, /The takeaway/i);
+  assert.doesNotMatch(html, /Technical articles/i);
+  assert.doesNotMatch(html, /ESSAY \/ 00/i);
+  assert.doesNotMatch(html, /How to Design Background Jobs/i);
 });
 
 test("mobile layout keeps the document vertically scrollable", async () => {
