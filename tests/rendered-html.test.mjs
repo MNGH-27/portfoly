@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 async function renderPortfolio() {
@@ -77,4 +78,11 @@ test("server-renders the portfolio content", async () => {
   assert.match(html, /Accessible Date Pickers/i);
   assert.match(html, /Parsing is not validation/i);
   assert.match(html, /Test behavior as a matrix/i);
+});
+
+test("mobile layout keeps the document vertically scrollable", async () => {
+  const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+
+  assert.match(css, /@media\s*\(max-width:760px\)[\s\S]*?\.sanctuary\{overflow-x:hidden;overflow-y:visible\}/);
+  assert.match(css, /\.archivePanel\{[^}]*height:100dvh;max-height:100dvh/);
 });
