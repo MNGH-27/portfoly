@@ -58,6 +58,8 @@ test("server-renders the portfolio content", async () => {
   assert.doesNotMatch(html, /Rasad Bonyad Maskan/i);
   assert.match(html, /Bonyad Maskan e-Services/i);
   assert.match(html, /University of Tehran/i);
+  assert.match(html, /Computer Science/i);
+  assert.doesNotMatch(html, /Computer Engineering/i);
   assert.match(html, /Rajaee University \| Software Development Team/i);
   assert.match(html, /Client: Iran&#x27;s Ministry of Education/i);
   assert.match(html, /Led frontend development of React\.js and Next\.js applications/i);
@@ -69,8 +71,10 @@ test("server-renders the portfolio content", async () => {
   assert.match(html, /Mohsen Nouri — Resume/i);
   assert.match(html, /Mohsen-Nouri-Resume\.pdf/i);
   assert.match(html, /Updated July 2026/i);
-  assert.match(html, /From Goroutines to Guarantees/i);
-  assert.match(html, /Backpressure is part of correctness/i);
-  assert.match(html, /Calendar UI Is a Systems Problem/i);
-  assert.match(html, /Accessibility changes the architecture/i);
+  assert.match(html, /Reliable Job Systems/i);
+  assert.match(html, /Idempotency makes at-least-once delivery usable/i);
+  assert.match(html, /Leases need fencing/i);
+  assert.match(html, /Accessible Date Pickers/i);
+  assert.match(html, /Parsing is not validation/i);
+  assert.match(html, /Test behavior as a matrix/i);
 });
