@@ -270,7 +270,7 @@ function Workspace({ onSelect }: { onSelect: (panel: PanelId) => void }) {
   );
 }
 
-export function PortfolioPage() {
+export function PortfolioPage({ threadnoteHref = "/threadnote/" }: { threadnoteHref?: string }) {
   const [activePanel, setActivePanel] = useState<PanelId | null>(null);
   const [paletteOpen, setPaletteOpen] = useState(false);
   useEffect(() => {
@@ -301,7 +301,7 @@ export function PortfolioPage() {
           <a href={documents[0].href}>{documents[0].title.en} · {documents[0].meta.en}</a>
         </section>
       </noscript>
-      <footer className="sanctuaryFooter"><span>© 2026 MOHSEN NOURI</span><p>Curiosity in. Useful software out.</p><div><a href={CONTACT.github} target="_blank" rel="noreferrer">GH</a><a href={CONTACT.linkedin} target="_blank" rel="noreferrer">IN</a><a href={`mailto:${CONTACT.email}`}>MAIL</a></div></footer>
+      <footer className="sanctuaryFooter"><span>© 2026 MOHSEN NOURI</span><p>Curiosity in. Useful software out.</p><div><a href={threadnoteHref}>THREADNOTE</a><a href={CONTACT.github} target="_blank" rel="noreferrer">GH</a><a href={CONTACT.linkedin} target="_blank" rel="noreferrer">IN</a><a href={`mailto:${CONTACT.email}`}>MAIL</a></div></footer>
       {activePanel ? <Panel panel={activePanel} onClose={() => setActivePanel(null)} /> : null}{paletteOpen ? <CommandPalette onSelect={openPanel} onClose={() => setPaletteOpen(false)} /> : null}
     </main>
   );

@@ -31,6 +31,11 @@ npm test
 
 ## Deployment
 
+Threadnote's public product and Google OAuth disclosure pages are available at
+/threadnote/, /threadnote/privacy/, and /threadnote/terms/ (under the repository
+base path on GitHub Pages). These are static information pages, not an online
+Google sign-in service. Publishing them does not complete Google's OAuth review.
+
 Pushes to `main` are automatically built and deployed to GitHub Pages by the
 workflow in `.github/workflows/deploy-pages.yml`. The production build uses
 Vinext's static export and applies the repository path supplied by GitHub

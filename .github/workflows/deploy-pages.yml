@@ -42,6 +42,11 @@ jobs:
         env:
           PAGES_BASE_PATH: ${{ steps.pages.outputs.base_path }}
 
+      - name: Test rendered pages
+        run: node --test tests/*.test.mjs
+        env:
+          PAGES_BASE_PATH: ${{ steps.pages.outputs.base_path }}
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v4
         with:
