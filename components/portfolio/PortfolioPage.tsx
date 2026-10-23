@@ -9,12 +9,13 @@ import {
 import { CONTACT, documents, experience, projects } from "@/data/portfolio";
 import type { Project } from "@/types/portfolio";
 
-type PanelId = "projects" | "engineering" | "about" | "archive" | "contact";
+type PanelId = "projects" | "engineering" | "about" | "recommendation" | "archive" | "contact";
 
 const navigation: Array<{ id: PanelId; label: string; detail: string; icon: typeof FiGrid }> = [
   { id: "projects", label: "Project systems", detail: "Computer", icon: FiCpu },
   { id: "engineering", label: "Engineering notes", detail: "Notebook", icon: FiBookOpen },
   { id: "about", label: "Profile & education", detail: "Bookshelf", icon: FiGrid },
+  { id: "recommendation", label: "Recommendation", detail: "LinkedIn reference", icon: FiLinkedin },
   { id: "archive", label: "Development archive", detail: "Desk files", icon: FiBox },
   { id: "contact", label: "Open a channel", detail: "Contact", icon: FiMail },
 ];
@@ -174,6 +175,13 @@ function AboutPanel() {
           <article key={`${item.company.en}-${item.date.en}`}><time>{item.date.en}</time><div><h4>{item.displayTitle?.en ?? item.role.en}</h4><p>{item.displayTitle ? item.context?.en : item.company.en}</p>{item.teamNote ? <span>{item.teamNote.en}</span> : null}{item.systems ? <div className="experienceSystems" aria-label="Related systems">{item.systems.map((system) => <span key={system.en}>{system.en}</span>)}</div> : null}<ul>{item.highlights.map((highlight) => <li key={highlight.en}>{highlight.en}</li>)}</ul></div></article>
         ))}
       </section>
+    </div>
+  );
+}
+
+function RecommendationPanel() {
+  return (
+    <div className="recommendationPanel">
       <section className="recommendationCard" aria-labelledby="recommendation-heading">
         <header className="recommendationHeader"><span><FiLinkedin aria-hidden="true" /> {recommendation.source}</span><time>{recommendation.date}</time></header>
         <div className="recommender"><span className="recommenderMark" aria-hidden="true">SS</span><div><h4 id="recommendation-heading">{recommendation.author}</h4><p>{recommendation.role}</p><small>{recommendation.relationship}</small></div></div>
@@ -254,14 +262,14 @@ function ContactPanel() {
 
 function Panel({ panel, onClose }: { panel: PanelId; onClose: () => void }) {
   const labels: Record<PanelId, [string, string]> = {
-    projects: ["Computer terminal", "Project systems"], engineering: ["Technical notebook", "Engineering notes"], about: ["Library index", "Profile & education"], archive: ["Desk archive", "Development journey"], contact: ["Secure channel", "Contact"],
+    projects: ["Computer terminal", "Project systems"], engineering: ["Technical notebook", "Engineering notes"], about: ["Library index", "Profile & education"], recommendation: ["Professional reference", "Recommendation"], archive: ["Desk archive", "Development journey"], contact: ["Secure channel", "Contact"],
   };
   return (
     <div className="panelLayer" role="dialog" aria-modal="true" aria-labelledby="panel-title">
       <button className="panelBackdrop" onClick={onClose} aria-label="Close panel" />
       <section className={`archivePanel panel-${panel}`}>
         <header className="panelHeader"><div><span>{labels[panel][0]}</span><h2 id="panel-title">{labels[panel][1]}</h2></div><button type="button" onClick={onClose} aria-label="Close panel"><FiX /></button></header>
-        <div className="panelBody">{panel === "projects" ? <ProjectsPanel /> : null}{panel === "engineering" ? <EngineeringPanel /> : null}{panel === "about" ? <AboutPanel /> : null}{panel === "archive" ? <ArchivePanel /> : null}{panel === "contact" ? <ContactPanel /> : null}</div>
+        <div className="panelBody">{panel === "projects" ? <ProjectsPanel /> : null}{panel === "engineering" ? <EngineeringPanel /> : null}{panel === "about" ? <AboutPanel /> : null}{panel === "recommendation" ? <RecommendationPanel /> : null}{panel === "archive" ? <ArchivePanel /> : null}{panel === "contact" ? <ContactPanel /> : null}</div>
       </section>
     </div>
   );
@@ -283,6 +291,7 @@ function Workspace({ onSelect }: { onSelect: (panel: PanelId) => void }) {
       <div className="deskLamp" aria-hidden="true"><i /><b /></div><div className="deskSurface" aria-hidden="true" />
       <button className="sceneObject monitor" onClick={() => onSelect("projects")} aria-label="Open project systems on the computer"><span className="objectHint">Computer <small>Project systems</small></span><div className="screen"><div className="screenBar"><i /><i /><i /><span>~/portfolio/systems</span></div><div className="screenCode"><small>01</small><span className="codeGold">package</span> main<br /><small>02</small><span className="codeTeal">func</span> build() System &#123;<br /><small>03</small>&nbsp;&nbsp;<span className="codeMuted">return</span> reliableSoftware<br /><small>04</small>&#125;<b>_</b></div><div className="screenStatus">6 systems indexed <span>● online</span></div></div><div className="monitorStand" /></button>
       <button className="sceneObject notebook" onClick={() => onSelect("engineering")} aria-label="Open engineering notes in the notebook"><span className="objectHint">Notebook <small>Engineering notes</small></span><div className="paperLines" /><strong>Systems<br />&amp; structure</strong><i /><i /><i /></button>
+      <button className="sceneObject referenceLetter" onClick={() => onSelect("recommendation")} aria-label="Open professional recommendation"><span className="objectHint">Reference letter <small>LinkedIn recommendation</small></span><i>RECOMMENDATION</i><b>SSN</b></button>
       <button className="sceneObject archiveDrawers" onClick={() => onSelect("archive")} aria-label="Open the development archive"><span className="objectHint">Desk archive <small>Development journey</small></span><i><b /></i><i><b /></i><i><b /></i></button>
       <div className="keyboard" aria-hidden="true"><i /><i /><i /><i /><i /><i /><i /><i /><i /></div><div className="coffee" aria-hidden="true"><span /></div><div className="roomFloor" aria-hidden="true" />
     </div>

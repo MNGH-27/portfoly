@@ -69,6 +69,7 @@ test("server-renders the portfolio content", async () => {
   assert.match(html, /Tutak/i);
   assert.match(html, /January 2024 — July 2026/i);
   assert.match(html, /Salar Sari Navaii/i);
+  assert.match(html, /LinkedIn reference/i);
   assert.match(html, /Senior Frontend Developer/i);
   assert.match(html, /October 22, 2026/i);
   assert.match(html, /Salar managed Mohsen directly/i);
