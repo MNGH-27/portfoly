@@ -68,6 +68,12 @@ test("server-renders the portfolio content", async () => {
   assert.match(html, /Sirat 2/i);
   assert.match(html, /Tutak/i);
   assert.match(html, /January 2024 — July 2026/i);
+  assert.match(html, /Salar Sari Navaii/i);
+  assert.match(html, /Senior Frontend Developer/i);
+  assert.match(html, /October 22, 2026/i);
+  assert.match(html, /Salar managed Mohsen directly/i);
+  assert.match(html, /strong experience in React and Next\.js/i);
+  assert.match(html, /recommend him to any team looking for a strong Senior Front-End Developer/i);
   assert.match(html, /Development journey/i);
   assert.match(html, /Mohsen Nouri — Resume/i);
   assert.match(html, /Mohsen-Nouri-Resume\.pdf/i);

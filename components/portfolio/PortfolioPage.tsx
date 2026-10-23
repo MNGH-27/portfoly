@@ -19,6 +19,20 @@ const navigation: Array<{ id: PanelId; label: string; detail: string; icon: type
   { id: "contact", label: "Open a channel", detail: "Contact", icon: FiMail },
 ];
 
+const recommendation = {
+  author: "Salar Sari Navaii",
+  role: "Senior Frontend Developer",
+  date: "October 22, 2026",
+  relationship: "Salar managed Mohsen directly",
+  source: "Received on LinkedIn",
+  paragraphs: [
+    "I really enjoyed working with Mohsen. He’s a great Senior Front-End Developer with strong experience in React and Next.js. He’s quick to understand problems, find the right solutions, and get things done without overcomplicating them.",
+    "One thing that always stood out to me was how fast and efficiently he worked, even when dealing with complex tasks. He has a good eye for code quality and knows how to balance speed with building things the right way.",
+    "Beyond his technical skills, Mohsen is someone you can count on. He’s easy to work with, takes his work seriously, and brings a lot of value to the team.",
+    "I’d happily work with him again and recommend him to any team looking for a strong Senior Front-End Developer.",
+  ],
+};
+
 /* Article publishing is intentionally paused; the portfolio no longer exposes this section.
 const articles = [
   {
@@ -160,6 +174,11 @@ function AboutPanel() {
           <article key={`${item.company.en}-${item.date.en}`}><time>{item.date.en}</time><div><h4>{item.displayTitle?.en ?? item.role.en}</h4><p>{item.displayTitle ? item.context?.en : item.company.en}</p>{item.teamNote ? <span>{item.teamNote.en}</span> : null}{item.systems ? <div className="experienceSystems" aria-label="Related systems">{item.systems.map((system) => <span key={system.en}>{system.en}</span>)}</div> : null}<ul>{item.highlights.map((highlight) => <li key={highlight.en}>{highlight.en}</li>)}</ul></div></article>
         ))}
       </section>
+      <section className="recommendationCard" aria-labelledby="recommendation-heading">
+        <header className="recommendationHeader"><span><FiLinkedin aria-hidden="true" /> {recommendation.source}</span><time>{recommendation.date}</time></header>
+        <div className="recommender"><span className="recommenderMark" aria-hidden="true">SS</span><div><h4 id="recommendation-heading">{recommendation.author}</h4><p>{recommendation.role}</p><small>{recommendation.relationship}</small></div></div>
+        <blockquote>{recommendation.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}</blockquote>
+      </section>
     </div>
   );
 }
@@ -297,6 +316,8 @@ export function PortfolioPage({ threadnoteHref = "/threadnote/" }: { threadnoteH
           {projects.map((project) => <article key={project.title.en}><h4>{project.title.en}</h4><strong>{project.type.en}</strong><p>{project.description.en}</p><ul>{project.highlights.map((item) => <li key={item.en}>{item.en}</li>)}</ul><p>{project.stack.join(" · ")}</p>{project.links.map((link) => <a href={link.href} key={link.href}>{link.label.en}</a>)}</article>)}
           <h3>Selected experience</h3>
           {experience.map((item) => <article key={`${item.company.en}-fallback`}><h4>{item.displayTitle?.en ?? item.role.en}</h4><p>{item.context?.en ?? item.company.en} · {item.date.en}</p>{item.teamNote ? <p>{item.teamNote.en}</p> : null}{item.systems ? <p>Systems: {item.systems.map((system) => system.en).join(" · ")}</p> : null}<ul>{item.highlights.map((highlight) => <li key={highlight.en}>{highlight.en}</li>)}</ul>{item.links?.map((link) => <a href={link.href} key={link.href}>{link.label.en}</a>)}</article>)}
+          <h3>Recommendation</h3>
+          <article><h4>{recommendation.author}</h4><p>{recommendation.role} · {recommendation.date} · {recommendation.relationship}</p><blockquote>{recommendation.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}</blockquote></article>
           <h3>Resume and professional documents</h3>
           <a href={documents[0].href}>{documents[0].title.en} · {documents[0].meta.en}</a>
         </section>
